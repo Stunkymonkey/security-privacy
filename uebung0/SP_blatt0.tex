@@ -1,0 +1,53 @@
+\documentclass[12pt,pdftex,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ulem}
+\usepackage{bbm}
+\usepackage{array}
+\usepackage{marvosym}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage[pdftex]{graphicx}
+\usepackage{listings}
+\lstset{language=Python,basicstyle=\footnotesize}
+\usepackage{pdfpages}
+\usepackage{booktabs}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{extarrows}
+\usepackage{rotating}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\title{Security and Privacy,\\ Blatt 0}
+\author{Franziska Hutter, XXXXXXX\\
+	Felix Bühler, 2973410}
+
+
+\begin{document}
+\maketitle
+\pagebreak
+
+\section*{Problem 1: Needham-Schroeder Protocol}
+
+\section*{Problem 2: Another attack}
+Reflection attack:\\
+Eine Person, die $ N_B $ korrekt entschlüsselt hat, ist jemand, der den KEY kennt (Alice). Allerdings kennt Bob selbst den KEY auch! Der Angreifer kann also die gesendeten Nachrichten auzeichnen und später nochmal senden und sich damit als Alice ausgeben.
+\\~\\
+E = Evil (= Attacker)
+\begin{enumerate}
+	\item Verbindung 1: A $ \rightarrow $ B \tab : $ enc_s^k(N_A) $
+	\item Verbindung 1: B $ \rightarrow $ A \tab : $ enc_s^k(N_B), N_A $
+	\item Verbindung 1: A $ \rightarrow $ B \tab : $ N_B $
+	\setlength{\itemsep}{20pt}
+	\item Verbindung 2: E $ \rightarrow $ A \tab : $ enc_s^k(N_B) $
+	\setlength{\itemsep}{5pt}
+	\item Verbindung 2: A $ \rightarrow $ E \tab : $ enc_s^k(N_A'), N_B $
+	\item Verbindung 3: E $ \rightarrow $ A \tab : $ enc_s^k(N_A') $
+	\item Verbindung 3: A $ \rightarrow $ E \tab : $ enc_s^k(N_A''), N_A' $
+	\item Verbindung 2: A $ \rightarrow $ E \tab : $ N_A' $
+\end{enumerate}
+\section*{Problem 3: Woo and Lam Mutual Authentication Protocol}
+
+\end{document}
