@@ -32,23 +32,65 @@
 
 \section*{Problem 1: Needham-Schroeder Protocol}
 
+\subsection*{a)}
+The attack on the Needham-Schroeder protocol is based on the fact that only the initiator (A) explicitly mentions who he is in an encrypted message. The identity of the correspondent (B) however is implied in the use of certain keys for encryption. This enables an adversary (E) to use the identity of the initiator towards another correspondent (B). In the improved NSL protocol this is fixed by including the name of the correspondent in his first reply. Since this message is encrypted with the public key of the impersonated participant, the adversary cannot read or alter it. So the attack fails, since the impersonated participant will know that the reply came from another participant, who he did not aim to communicate with.
+
+\subsection*{b)}
+Replay attack:
+
+E = Evil (= Attacker)\\
+Bei der ersten Verbindung zeichnet der Angreifer alle Pakete auf und merkt sich diese.
+\begin{enumerate}
+	\item Verbindung 1: A $ \rightarrow $ B \tab : $ \{N_A, A\}^a_{k_B} $
+	\item Verbindung 1: B $ \rightarrow $ A \tab : $ \{N_A, N_B, B\}^a_{k_A} $
+	\item Verbindung 1: A $ \rightarrow $ B \tab : $ \{N_B\}^a_{k_B} $
+	\setlength{\itemsep}{20pt}
+	\item Verbindung 2: A $ \rightarrow $ E \tab : $ \{N_A, A\}^a_{k_B} $
+	\setlength{\itemsep}{5pt}
+	\item Verbindung 2: E $ \rightarrow $ A \tab : $ \{N_A, N_B, B\}^a_{k_A} $
+	\item Verbindung 2: A $ \rightarrow $ E \tab : $ \{N_B\}^a_{k_B} $
+\end{enumerate}
+Bei der 2. Verbindung wählt A exakt die gleiche Nonce. Hierdurch kann der Angreifer einfach die alte Nachricht von B senden. A denkt somit B ist auf der anderen Seite des Kanals. In Wirklichkeit ist es aber E. E bekommt allerdings keinen Zugriff auf die Keys um Nachrichten zu entschlüsseln. Alice denkt, dass die Verbindung also erfolgreich war. Es kann sozusagen vorgetäuscht werden, dass B Nachrichten schon bekommen hat, was aber nicht der Fall ist.
+
 \section*{Problem 2: Another attack}
 Reflection attack:\\
 Eine Person, die $ N_B $ korrekt entschlüsselt hat, ist jemand, der den KEY kennt (Alice). Allerdings kennt Bob selbst den KEY auch! Der Angreifer kann also die gesendeten Nachrichten aufzeichnen und später nochmal senden und sich damit als Alice ausgeben.
 \\~\\
 E = Evil (= Attacker)
 \begin{enumerate}
-	\item Verbindung 1: A $ \rightarrow $ B \tab : $ enc_s^k(N_A) $
-	\item Verbindung 1: B $ \rightarrow $ A \tab : $ enc_s^k(N_B), N_A $
+	\item Verbindung 1: A $ \rightarrow $ B \tab : $ \{N_A\}^s_k $
+	\item Verbindung 1: B $ \rightarrow $ A \tab : $ \{N_B\}^s_k, N_A $
 	\item Verbindung 1: A $ \rightarrow $ B \tab : $ N_B $
 	\setlength{\itemsep}{20pt}
-	\item Verbindung 2: E $ \rightarrow $ A \tab : $ enc_s^k(N_B) $
+	\item Verbindung 2: E $ \rightarrow $ A \tab : $ \{N_B\}^s_k $
 	\setlength{\itemsep}{5pt}
-	\item Verbindung 2: A $ \rightarrow $ E \tab : $ enc_s^k(N_A'), N_B $
-	\item Verbindung 3: E $ \rightarrow $ A \tab : $ enc_s^k(N_A') $
-	\item Verbindung 3: A $ \rightarrow $ E \tab : $ enc_s^k(N_A''), N_A' $
+	\item Verbindung 2: A $ \rightarrow $ E \tab : $ \{N_A'\}^s_k, N_B $
+	\item Verbindung 3: E $ \rightarrow $ A \tab : $ \{N_A'\}^s_k $
+	\item Verbindung 3: A $ \rightarrow $ E \tab : $ \{N_A''\}^s_k, N_A' $
 	\item Verbindung 2: A $ \rightarrow $ E \tab : $ N_A' $
 \end{enumerate}
 \section*{Problem 3: Woo and Lam Mutual Authentication Protocol}
+
+E = Evil (= Attacker)
+\begin{enumerate}
+	\item Verbindung 1: $ E_A $ $ \rightarrow $ B \tab : $ A, B $
+	\item Verbindung 1: B $ \rightarrow $ $ E_A $ \tab : $ B, N_B $
+	\item Verbindung 1: $ E_A $ $ \rightarrow $ B \tab : $ \{A, B, B , N_B \}^{s}_{K_{AS}} $
+	\item Verbindung 1: B $ \rightarrow $ $ E_S $ \tab : $ \{A, B, B , N_B \}^{s}_{K_{AS}}, \{A, B, B , N_B \}^{s}_{K_{BS}} $
+
+	\setlength{\itemsep}{20pt}
+	\item Verbindung 2: $ E_A $ $ \rightarrow $ B \tab : $ A, N_B $
+	\setlength{\itemsep}{5pt}
+	\item Verbindung 2: B $ \rightarrow $ $ E_A $ \tab : $ B, N_B' $
+	\item Verbindung 2: $ E_A $ $ \rightarrow $ B \tab : $ \{A, B, N_B , N_B' \}^{s}_{K_{AS}} $
+	\item Verbindung 2: B $ \rightarrow $ $ E_S $ \tab : $ \{A, B, N_B , N_B' \}^{s}_{K_{AS}}, \{A, B, N_B , N_B' \}^{s}_{K_{BS}} $
+
+	\setlength{\itemsep}{20pt}
+	\item Verbindung 1: $ E_S $ $ \rightarrow $ B \tab : $ \{A, B , N_B, N_B' \}^{s}_{K_{AS}}, \{A, B , N_B, N_B' \}^{s}_{K_{BS}} $
+	\setlength{\itemsep}{5pt}
+	\item Verbindung 1: B $ \rightarrow $ $ E_A $ \tab : $ \{A, B , N_B, N_B' \}^{s}_{K_{AS}}, \{B , N_B \}^{s}_{N_B'} $
+	\item Verbindung 1: $ E_A $ $ \rightarrow $ B \tab : $ \{N_B \}^{s}_{N_B'} $
+\end{enumerate}
+
 
 \end{document}
