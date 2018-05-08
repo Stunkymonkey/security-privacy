@@ -33,12 +33,35 @@
 \section*{Problem 1: Specification of Protocols}
 Formal specification of the Woo and Lam Mutual Authentication Protocol:
 \linebreak\linebreak
-P = (\{$\Pi_1$, $\Pi_2$, $\Pi_2$\}, W)\\~\\
+P = (\{$\Pi_1$, $\Pi_2$, $\Pi_3$, $\Pi_4$\}, W)\\~\\
 with\\~\\
 W = \{A, B, S\}\\~\\
-$\Pi_1$ = $\Pi_A^{i,B,S}$ = ? \\~\\
-$\Pi_1$ = $\Pi_B^{r,A,S}$ = ? \\~\\
-$\Pi_1$ = $\Pi_S^{i,A,B}$ = ? \\~\\
+
+$\Pi_1 = \Pi_A^{i,B} =$
+\begin{enumerate}
+	\item \tab $ A \rightarrow \langle A, N_A\rangle $
+	\item \tab $ \langle B, x \rangle \rightarrow \{\langle A, \langle B, \langle N_A, x\rangle\rangle\rangle\}_{K_{AS}}^s$	
+	\item \tab $ \{\langle B,\langle N_A, \langle x, y\rangle\rangle\rangle\}_{K_{AS}}^{s}, \{\langle N_A, x\rangle\}_y^s \rightarrow \{x\}_y^s $
+\end{enumerate} 
+
+$\Pi_2 = \Pi_B^{r,A} =$
+\begin{enumerate}
+\item \tab $\langle A, x\rangle \rightarrow \langle B, N_B \rangle$
+\item \tab $\{\langle A, \langle B, \langle x, N_B \rangle\rangle\rangle\}_{K_{AS}}^s
+\rightarrow \{\langle B,\langle x, \langle N_B, K_{AB}\rangle\rangle\rangle\}_{K_{AS}}^{s}, \{\langle x, N_B\rangle\}_{K_{AB}}^s$
+\item \tab $ \{N_B\}_{K_{AB}}^s \rightarrow \{secret\}_{K_{AB}}^s$
+\end{enumerate}
+
+$\Pi_3 = \Pi_B^{i,S} =$
+\begin{enumerate}
+\item \tab $ B \rightarrow \{\langle A, \langle B, \langle x, N_B \rangle\rangle\rangle\}_{K_{AS}}^s, \{\langle A, \langle B, \langle x, N_B \rangle\rangle\rangle\}_{K_{BS}}^s $
+\item \tab $ \{\langle B, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{AS}}^s,\{\langle A, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{BS}}^s $
+\end{enumerate}
+
+$\Pi_4 = \Pi_S^{r,B} =$
+\begin{enumerate}
+\item \tab $ \{\langle A, \langle B, \langle x, y\rangle\rangle\rangle\}_{K_{AS}}^s, \{\langle A, \langle B, \langle x, y\rangle\rangle\rangle\}_{K_{BS}}^s $ \\ \tab $\rightarrow \{\langle B, \langle x, \langle y, K_{AB}\rangle\rangle\rangle\}_{K_{AS}}^s,\{\langle A, \langle x, \langle y, K_{AB}\rangle\rangle\rangle\}_{K_{BS}}^s $
+\end{enumerate}
 
 \section*{Problem 2: Attacks on Protocols}
 
