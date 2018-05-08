@@ -32,7 +32,7 @@
 
 \section*{Problem 1: Specification of Protocols}
 Formal specification of the Woo and Lam Mutual Authentication Protocol:
-\linebreak\linebreak
+\\~\\
 P = (\{$\Pi_1$, $\Pi_2$, $\Pi_3$, $\Pi_4$\}, $\mathcal{W}$)\\~\\
 with\\~\\
 $\mathcal{W}$ = \{A, B, S\}\\~\\
@@ -63,11 +63,19 @@ $\Pi_4 = \Pi_S^{r,B} =$
 \item \tab $ \{\langle A, \langle B, \langle x, y\rangle\rangle\rangle\}_{K_{AS}}^s, \{\langle A, \langle B, \langle x, y\rangle\rangle\rangle\}_{K_{BS}}^s $ \\ \tab $\rightarrow \{\langle B, \langle x, \langle y, K_{AB}\rangle\rangle\rangle\}_{K_{AS}}^s,\{\langle A, \langle x, \langle y, K_{AB}\rangle\rangle\rangle\}_{K_{BS}}^s $
 \end{enumerate}
 
+\newpage
 \section*{Problem 2: Attacks on Protocols}
+Formal description of an attack on the Woo and Lam Mutual Authentication Protocol:\\~\\
+% Formal description of the instances of the protocol
 Protocol P = $(\{\Pi_1, ..., \Pi_n\}, \mathcal{W})$ \\~\\
 with\\~\\
 $\mathcal{W}$ = \{I, A, B, S\}\\~\\
-
+$\Pi_1 = \Pi_A^{i,B} =$
+\begin{enumerate}
+\item \tab test %add actual stuff here...
+\end{enumerate}\
+\newline
+% formal description of the actual attack, which consists of the execution ordering of P and some substitutions for the variables in the instances of P
 Attack $\mathcal{A}_{WLMAP} = (\pi, \sigma) $ \\~\\
 with\\~\\
 $\pi = $ the execution ordering for $ P = ? $ \\~\\
