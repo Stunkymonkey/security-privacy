@@ -33,7 +33,7 @@
 \section*{Problem 1: Specification of Protocols}
 Formal specification of the Woo and Lam Mutual Authentication Protocol:
 \\~\\
-P = (\{$\Pi_1$, $\Pi_2$, $\Pi_3$, $\Pi_4$\}, $\mathcal{W}$)\\~\\
+P = (\{$\Pi_1$, $\Pi_2$, $\Pi_3$\}, $\mathcal{W}$)\\~\\
 with\\~\\
 $\mathcal{W}$ = \{A, B, S\}\\~\\
 
@@ -52,10 +52,11 @@ $\Pi_2 = \Pi_B^{r,A} =$
 \item \tab $ \{N_B\}_{K_{AB}}^s \rightarrow \{secret\}_{K_{AB}}^s$
 \end{enumerate}
 
+% I'm not sure whether this is really necessary 
 $\Pi_3 = \Pi_B^{i,S} =$
 \begin{enumerate}
 \item \tab $ B \rightarrow \{\langle A, \langle B, \langle x, N_B \rangle\rangle\rangle\}_{K_{AS}}^s, \{\langle A, \langle B, \langle x, N_B \rangle\rangle\rangle\}_{K_{BS}}^s $
-\item \tab $ \{\langle B, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{AS}}^s,\{\langle A, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{BS}}^s $
+%\item \tab $ \{\langle B, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{AS}}^s,\{\langle A, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{BS}}^s $
 \end{enumerate}
 
 $\Pi_4 = \Pi_S^{r,B} =$
@@ -67,18 +68,37 @@ $\Pi_4 = \Pi_S^{r,B} =$
 \section*{Problem 2: Attacks on Protocols}
 Formal description of an attack on the Woo and Lam Mutual Authentication Protocol:\\~\\
 % Formal description of the instances of the protocol
-Protocol P = $(\{\Pi_1, ..., \Pi_n\}, \mathcal{W})$ \\~\\
+Protocol P = $(\{\Pi_1, ..., \Pi_n\}, \mathcal{W}), n \in \{1,...,7\}$ \\~\\
 with\\~\\
-$\mathcal{W}$ = \{I, A, B, S\}\\~\\
-$\Pi_1 = \Pi_A^{i,B} =$
+$\mathcal{W}$ = \{I, A, B, S, $K_{IS}$\}\\~\\
+$\Pi_i = \Pi_j$ as described in problem 1 for $i,j\in \{1,2,3,4\}\land i=j$ where both, the roles of A and S are performed by the Attacker I.\\~\\
+
+$\Pi_5 = \Pi_A^{i,B} =$
 \begin{enumerate}
-\item \tab test %add actual stuff here...
+	\item \tab $ A \rightarrow \langle A, N_A'\rangle $
+	\item \tab $ \langle B, x \rangle \rightarrow \{\langle A, \langle B, \langle N_A', x\rangle\rangle\rangle\}_{K_{AS}}^s$	
+	\item \tab $ \{\langle B,\langle N_A', \langle x, y\rangle\rangle\rangle\}_{K_{AS}}^{s}, \{\langle N_A', x\rangle\}_y^s \rightarrow \{x\}_y^s $
+\end{enumerate}
+
+$\Pi_6 = \Pi_B^{r,A} =$
+\begin{enumerate}
+\item \tab $\langle A, x\rangle \rightarrow \langle B, N_B' \rangle$
+\item \tab $\{\langle A, \langle B, \langle x, N_B' \rangle\rangle\rangle\}_{K_{AS}}^s
+\rightarrow \{\langle B,\langle x, \langle N_B', K_{AB}\rangle\rangle\rangle\}_{K_{AS}}^{s}, \{\langle x, N_B'\rangle\}_{K_{AB}}^s$
+\item \tab $ \{N_B'\}_{K_{AB}}^s \rightarrow \{secret\}_{K_{AB}}^s$
+\end{enumerate}
+
+$\Pi_7 = \Pi_B^{i,S} =$
+\begin{enumerate}
+\item \tab $ B \rightarrow \{\langle A, \langle B, \langle x, N_B' \rangle\rangle\rangle\}_{K_{AS}}^s, \{\langle A, \langle B, \langle x, N_B' \rangle\rangle\rangle\}_{K_{BS}}^s $
+%\item \tab $ \{\langle B, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{AS}}^s,\{\langle A, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{BS}}^s $
 \end{enumerate}\
-\newline
+
+where $\Pi_5$ through $\Pi_7$ ressemble the second session of the protocol\\~\\
 % formal description of the actual attack, which consists of the execution ordering of P and some substitutions for the variables in the instances of P
 Attack $\mathcal{A}_{WLMAP} = (\pi, \sigma) $ \\~\\
 with\\~\\
-$\pi = $ the execution ordering for $ P = ? $ \\~\\
+$\pi = $ the execution ordering for $ P =$ (1, 2, 1, 3, 5, 6, 5, 7, 4, 2, 1, 2) \\~\\
 and \\~\\
 $\sigma =? $
 
