@@ -71,7 +71,7 @@ Formal description of an attack on the Woo and Lam Mutual Authentication Protoco
 Protocol P = $(\{\Pi_1, ..., \Pi_n\}, \mathcal{W}), n \in \{1,...,7\}$ \\~\\
 with\\~\\
 $\mathcal{W}$ = \{I, A, B, S, $K_{IS}$\}\\~\\
-$\Pi_i = \Pi_j$ as described in problem 1 for $i,j\in \{1,2,3,4\}\land i=j$ where both, the roles of A and S are performed by the Attacker I.\\~\\
+$\Pi_i = \Pi_j$ as described in problem 1 for $i,j\in \{1,2,3,4\}\land i=j$ where both, the roles of A and S are performed by the Attacker I, denoted as $I_A$ and $I_S$.\\~\\
 
 $\Pi_5 = \Pi_A^{i,B} =$
 \begin{enumerate}
@@ -104,6 +104,9 @@ $\sigma =? $
 
 
 \section*{Problem 3: Security Proof by Hand}
+$\mathcal{W}$ = $\{I, A, B\}$ (initial intruder knowledge). Let $\mathcal{L}$ be the set of messages, that the intruder could ever accumulate throughout the execution of P. $\mathcal{L}$ = $\{\{K, A\}_{K_{AS}}^s, \{secret\}_K^s\}$.\newline Note: Since the intruder knows the rules of the protocol, he will be able to conclude that K is the key to decrypt the secret.\newline
+The secret would be revealed to the intruder if the following holds: $secret\in d(\mathcal{W}\cup\mathcal{L})$. Since $K_{AS} \notin (\mathcal{W}\cup\mathcal{L})$ and $K \notin (\mathcal{W}\cup\mathcal{L})$, not futher knowledge can be derived from $(\mathcal{W}\cup\mathcal{L})$. Thus the given protocol is secure in terms that the secret is never revealed to the intruder.
+%Todo: Maybe also check for the security of authentication.
 
 \section*{Problem 4: AVISPA Tool: Woo and Lam Attack}
 
