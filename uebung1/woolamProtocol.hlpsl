@@ -15,10 +15,10 @@ role alice (A, S, B: agent,
 	   State':= 2 /\ Na':= new()
 				  /\	SND_BA(A, Na')
 
-	2. State  = 2 /\ RCV_BA(B,Nb') =|>                                                                                                                                                                     
+	2. State  = 2 /\ RCV_BA(B,Nb') =|>
 	   State':= 3 /\ SND_BA({A.B.Na'.Nb'}_Kas)
 	   
-	3. State = 5 /\ RCV_BA({B .Na'.Nb' .Kab'}_Kas ,{Na'.Nb'.Kab'}_Kab') =|>
+	3. State  = 5 /\ RCV_BA({B .Na'.Nb' .Kab'}_Kas ,{Na'.Nb'.Kab'}_Kab') =|>
 	   State':= 5 /\ SND_BA({Nb'}_Kab')
 				  
 end role
@@ -40,12 +40,12 @@ role bob (A, S, B: agent,
 		1. State  = 1 /\ RCV_AB(A, Na') =|>
 		   State':= 3 /\ Nb':= new()
                       /\ SND_AB(B,Nb')
-	 	      
-        2. State = 3 /\ RCV_AB({A.B.Na'.Nb'}_Kas.X) =|>
-           State':=5 /\ SND_SB({A.B.Na'.Nb'}_Kas.X,{A .B .Na'.Nb'}_Kbs)
+		      
+        2. State  = 3 /\ RCV_AB({A.B.Na'.Nb'}_Kas.X) =|>
+           State' :=5 /\ SND_SB({A.B.Na'.Nb'}_Kas.X,{A .B .Na'.Nb'}_Kbs)
  
-        3. State = 5 /\ RCV_SB({B. Na'.Nb'.Kab'}_Kas.X ,{A. Na'. Nb'. Kab'}_Kbs) =|>
-           State':=7 /\ SND_AB({B. Na'.Nb'.Kab'}_Kas.X ,{Na'.Nb'.Kab}_Kab')
+        3. State  = 5 /\ RCV_SB({B. Na'.Nb'.Kab'}_Kas.X ,{A. Na'. Nb'. Kab'}_Kbs) =|>
+           State' :=7 /\ SND_AB({B. Na'.Nb'.Kab'}_Kas.X ,{Na'.Nb'.Kab}_Kab')
 		%4. State = 9 /\ RCV_AB({Nb'}_Kab') 
 		  
 end role 
