@@ -1,0 +1,81 @@
+cl-atse -notype -v -ns -short woolamProtocol.hlpsl 
+%% Translation of woolamProtocol.hlpsl
+%% IF output in ./woolamProtocol.if
+
+----------------
+  AtSe Summary  
+----------------
+
+  Protocol file: ./woolamProtocol.if
+  Attack found : NO
+
+  Analysed   : 44190 states
+  Reachable  : 7364 states
+  Translation: 0.00 seconds
+  Computation: 0.11 seconds
+
+
+---------------------------------------------
+            Internal System State            
+  (initial state after reading the if file)  
+---------------------------------------------
+
+Intruder state :
+----------------
+
+Intruder Knowledge :  start i s b a 
+
+
+Interpreted protocol specification :
+------------------------------------
+
+Role server played by (b,9):
+| {a.s.Na(31).Nb(31)}_kas.{a.s.Na(31).Nb(31)}_kbs => {s.Na(31).Nb(31).kab}_kas.
+|      {a.Na(31).Nb(31).kab}_kbs
+
+Role bob played by (s,8):
+| a.Na(23) => s.n23(Nb)
+| X(24) => X(24).{n24(Session).a.s.Na(23).n23(Nb)}_kbs
+| Y(25).{n24(Session).a.Na(23).n23(Nb).Kab(25)}_kbs => Y(25).
+|      {Na(23).n23(Nb)}_Kab(25)
+| {n23(Nb)}_Kab(25) => ()
+|    & Request(s,a,kab_id,Kab(25));
+
+Role alice played by (a,7):
+| start => a.n17(Na)
+| s.Nb(18) => {n18(Session).a.s.n17(Na).Nb(18)}_kas
+| {n18(Session).s.n17(Na).Nb(18).Kab(19)}_kas.{n17(Na).Nb(18)}_Kab(19)
+|   => {Nb(18)}_Kab(19)
+|    & Witness(a,s,kab_id,Kab(19));
+
+Role server played by (b,5):
+| {a.s.Na(15).Nb(15)}_kas.{a.s.Na(15).Nb(15)}_kbs => {s.Na(15).Nb(15).kab}_kas.
+|      {a.Na(15).Nb(15).kab}_kbs
+
+Role bob played by (s,4):
+| a.Na(7) => s.n7(Nb)
+| X(8) => X(8).{n8(Session).a.s.Na(7).n7(Nb)}_kbs
+| Y(9).{n8(Session).a.Na(7).n7(Nb).Kab(9)}_kbs => Y(9).{Na(7).n7(Nb)}_Kab(9)
+| {n7(Nb)}_Kab(9) => ()
+|    & Request(s,a,kab_id,Kab(9));
+
+Role alice played by (a,3):
+| start => a.n1(Na)
+| s.Nb(2) => {n2(Session).a.s.n1(Na).Nb(2)}_kas
+| {n2(Session).s.n1(Na).Nb(2).Kab(3)}_kas.{n1(Na).Nb(2)}_Kab(3)
+|   => {Nb(2)}_Kab(3)
+|    & Witness(a,s,kab_id,Kab(3));
+
+
+Some Remarks :
+--------------
+
+- The syntax of protocol steps is
+   "Received Msg" => "Sent Msg"  [Equalities] & Inequalities & IF facts
+- A Role is a tree where steps are unary nodes and choice points are n-ary nodes
+- The Initial System state is the state of cl-atse at the begining of the search
+  for attacks, and represents both the intruder and honest participants state.
+- See the cl-atse's subsection in the user-manual for more details.
+
+%% IF temp. file removed : ./woolamProtocol.if
+
