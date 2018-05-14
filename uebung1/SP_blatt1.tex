@@ -39,30 +39,30 @@ $\mathcal{W}$ = \{A, B, S\}\\~\\
 
 $\Pi_1 = \Pi_A^{i,B} =$
 \begin{enumerate}
-	\item \tab $ A \rightarrow \langle A, N_A\rangle $
-	\item \tab $ \langle B, x \rangle \rightarrow \{\langle A, \langle B, \langle N_A, x\rangle\rangle\rangle\}_{K_{AS}}^s$	
-	\item \tab $ \{\langle B,\langle N_A, \langle x, y\rangle\rangle\rangle\}_{K_{AS}}^{s}, \{\langle N_A, x\rangle\}_y^s \rightarrow \{x\}_y^s $
+	\item \tab $ B \rightarrow \langle A, N_A\rangle $
+	\item \tab $ \langle B, x_1 \rangle \rightarrow \{\langle A, \langle B, \langle N_A, x_1\rangle\rangle\rangle\}_{K_{AS}}^s$	
+	\item \tab $ \{\langle B,\langle N_A, \langle x_1, x_2\rangle\rangle\rangle\}_{K_{AS}}^{s}, \{\langle N_A, x_1\rangle\}_{x_2}^s \rightarrow \{x_1\}_{x_2}^s $
 \end{enumerate} 
 
 $\Pi_2 = \Pi_B^{r,A} =$
 \begin{enumerate}
-\item \tab $\langle A, x\rangle \rightarrow \langle B, N_B \rangle$
-\item \tab $\{\langle A, \langle B, \langle x, N_B \rangle\rangle\rangle\}_{K_{AS}}^s
-\rightarrow \{\langle B,\langle x, \langle N_B, K_{AB}\rangle\rangle\rangle\}_{K_{AS}}^{s}, \{\langle x, N_B\rangle\}_{K_{AB}}^s$
+\item \tab $\langle A, x_3\rangle \rightarrow \langle B, N_B \rangle$
+\item \tab $x_{11} \rightarrow x_{12}, \{\langle x_3, N_B\rangle\}_{K_{AB}}^s$
 \item \tab $ \{N_B\}_{K_{AB}}^s \rightarrow \{secret\}_{K_{AB}}^s$
 \end{enumerate}
 
 % I'm not sure whether this is really necessary 
 $\Pi_3 = \Pi_B^{i,S} =$
 \begin{enumerate}
-\item \tab $ B \rightarrow \{\langle A, \langle B, \langle x, N_B \rangle\rangle\rangle\}_{K_{AS}}^s, \{\langle A, \langle B, \langle x, N_B \rangle\rangle\rangle\}_{K_{BS}}^s $
-%\item \tab $ \{\langle B, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{AS}}^s,\{\langle A, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{BS}}^s $
+\item \tab $ S \rightarrow x_{11}, \{\langle A, \langle B, \langle x_4, N_B \rangle\rangle\rangle\}_{K_{BS}}^s $
 \end{enumerate}
 
 $\Pi_4 = \Pi_S^{r,B} =$
 \begin{enumerate}
-\item \tab $ \{\langle A, \langle B, \langle x, y\rangle\rangle\rangle\}_{K_{AS}}^s, \{\langle A, \langle B, \langle x, y\rangle\rangle\rangle\}_{K_{BS}}^s $ \\ \tab $\rightarrow \{\langle B, \langle x, \langle y, K_{AB}\rangle\rangle\rangle\}_{K_{AS}}^s,\{\langle A, \langle x, \langle y, K_{AB}\rangle\rangle\rangle\}_{K_{BS}}^s $
-\end{enumerate}
+\item \tab $ \{\langle A, \langle B, \langle x_5, x_6\rangle\rangle\rangle\}_{K_{AS}}^s, \{\langle A, \langle B, \langle x_5, x_6\rangle\rangle\rangle\}_{K_{BS}}^s $ \\ \tab $\rightarrow \{\langle B, \langle x_5, \langle x_6, K_{AB}\rangle\rangle\rangle\}_{K_{AS}}^s,\{\langle A, \langle x_5, \langle x_6, K_{AB}\rangle\rangle\rangle\}_{K_{BS}}^s $
+\end{enumerate}\
+\\
+with $x_i$, $i\in\mathbb{N}$ being variables.
 
 \newpage
 \section*{Problem 2: Attacks on Protocols}
@@ -71,42 +71,58 @@ Formal description of an attack on the Woo and Lam Mutual Authentication Protoco
 Protocol P = $(\{\Pi_1, ..., \Pi_n\}, \mathcal{W}), n \in \{1,...,7\}$ \\~\\
 with\\~\\
 $\mathcal{W}$ = \{I, A, B, S, $K_{IS}$\}\\~\\
-$\Pi_i = \Pi_j$ as described in problem 1 for $i,j\in \{1,2,3,4\}\land i=j$ where both, the roles of A and S are performed by the Attacker I, denoted as $I_A$ and $I_S$.\\~\\
+$\Pi_i = \Pi_j$ as described in problem 1 for $i,j\in \{1,2,3,4\}\land i=j$ %where both, the roles of A and S are performed by the Attacker I, denoted as $I_A$ and $I_S$.
+\\~\\
 
 $\Pi_5 = \Pi_A^{i,B} =$
 \begin{enumerate}
-	\item \tab $ A \rightarrow \langle A, N_A'\rangle $
-	\item \tab $ \langle B, x \rangle \rightarrow \{\langle A, \langle B, \langle N_A', x\rangle\rangle\rangle\}_{K_{AS}}^s$	
-	\item \tab $ \{\langle B,\langle N_A', \langle x, y\rangle\rangle\rangle\}_{K_{AS}}^{s}, \{\langle N_A', x\rangle\}_y^s \rightarrow \{x\}_y^s $
+	\item \tab $ B \rightarrow \langle A, N_A'\rangle $
+	\item \tab $ \langle B, x_7 \rangle \rightarrow \{\langle A, \langle B, \langle N_A', x_7\rangle\rangle\rangle\}_{K_{AS}}^s$	
+	\item \tab $ \{\langle B,\langle N_A', \langle x_7, x_8\rangle\rangle\rangle\}_{K_{AS}}^{s}, \{\langle N_A', x_7\rangle\}_{x_8}^s \rightarrow \{x_7\}_y^s $
 \end{enumerate}
 
 $\Pi_6 = \Pi_B^{r,A} =$
 \begin{enumerate}
-\item \tab $\langle A, x\rangle \rightarrow \langle B, N_B' \rangle$
-\item \tab $\{\langle A, \langle B, \langle x, N_B' \rangle\rangle\rangle\}_{K_{AS}}^s
-\rightarrow \{\langle B,\langle x, \langle N_B', K_{AB}\rangle\rangle\rangle\}_{K_{AS}}^{s}, \{\langle x, N_B'\rangle\}_{K_{AB}}^s$
+\item \tab $\langle A, x_9\rangle \rightarrow \langle B, N_B' \rangle$
+\item \tab $x_{14} \rightarrow x_{15}, \{\langle x_9, N_B'\rangle\}_{K_{AB}}^s$
 \item \tab $ \{N_B'\}_{K_{AB}}^s \rightarrow \{secret\}_{K_{AB}}^s$
 \end{enumerate}
 
 $\Pi_7 = \Pi_B^{i,S} =$
 \begin{enumerate}
-\item \tab $ B \rightarrow \{\langle A, \langle B, \langle x, N_B' \rangle\rangle\rangle\}_{K_{AS}}^s, \{\langle A, \langle B, \langle x, N_B' \rangle\rangle\rangle\}_{K_{BS}}^s $
+\item \tab $ S \rightarrow x_{14}, \{\langle A, \langle B, \langle x_{10}, N_B' \rangle\rangle\rangle\}_{K_{BS}}^s $
 %\item \tab $ \{\langle B, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{AS}}^s,\{\langle A, \langle x, \langle N_B, y\rangle\rangle\rangle\}_{K_{BS}}^s $
 \end{enumerate}\
-
+\\
 where $\Pi_5$ through $\Pi_7$ ressemble the second session of the protocol\\~\\
 % formal description of the actual attack, which consists of the execution ordering of P and some substitutions for the variables in the instances of P
 Attack $\mathcal{A}_{WLMAP} = (\pi, \sigma) $ \\~\\
 with\\~\\
 $\pi = $ the execution ordering for $ P =$ (1, 2, 1, 3, 5, 6, 5, 7, 4, 2, 1, 2) \\~\\
 and \\~\\
-$\sigma =? $
-
+$\sigma = \{	
+				x_1 \mapsto N_B, 
+				x_2 \mapsto K_{AB}, 
+				x_3 \mapsto N_A,
+				x_4 \mapsto N_A,
+				x_5 \mapsto N_A,
+				x_6 \mapsto N_B,
+				x_7 \mapsto N_B',
+				x_8 \mapsto K_{AB}',
+				x_9 \mapsto N_A',
+				x_{10} \mapsto N_A',
+				x_{11} \mapsto \{\langle A, \langle B, \langle N_A, N_B\rangle\rangle\rangle\}_{K_{AS}}^s,
+				x_{12} \mapsto \{\langle B, \langle N_A, \langle N_B, K_{AB}\rangle\rangle\rangle\}_{K_{AS}}^s,
+				x_{14} \mapsto \{\langle A, \langle B, \langle N_A', N_B'\rangle\rangle\rangle\}_{K_{AS}}^s
+\}$\\~\\
+Note: There is no substitution for $x_{15}$, because step 2 of $\Pi_6$ is never executed according to the execution ordering $\pi$.
+\\~\\
+The actual attack, as already described in Homework 0, is possible due to the intruder being able to impersonate A and S, and selecting $N_A$ and $N_A'$ arbitrarily. Furthermore, the key $K_{AS}$ may be selected arbitrarily by the intruder, since he impersonates both users of the key and others can not verify the use of $K_{AS}$.
 
 \section*{Problem 3: Security Proof by Hand}
-$\mathcal{W}$ = $\{I, A, B\}$ (initial intruder knowledge). Let $\mathcal{L}$ be the set of messages, that the intruder could ever accumulate throughout the execution of P. $\mathcal{L}$ = $\{\{K, A\}_{K_{AS}}^s, \{secret\}_K^s\}$.\newline Note: Since the intruder knows the rules of the protocol, he will be able to conclude that K is the key to decrypt the secret.\newline
-The secret would be revealed to the intruder if the following holds: $secret\in d(\mathcal{W}\cup\mathcal{L})$. Since $K_{AS} \notin (\mathcal{W}\cup\mathcal{L})$ and $K \notin (\mathcal{W}\cup\mathcal{L})$, not futher knowledge can be derived from $(\mathcal{W}\cup\mathcal{L})$. Thus the given protocol is secure in terms that the secret is never revealed to the intruder.
-%Todo: Maybe also check for the security of authentication.
+$\mathcal{W}$ = $\{I, A, B\}$ (initial intruder knowledge). Let $\mathcal{L}$ be the set of messages, that the intruder could ever accumulate throughout the execution of P. $\mathcal{L}$ = $\{\{K, A\}_{K_{AS}}^s, \{secret\}_K^s\}$.\newline Note: Since the intruder knows the rules of the protocol, he would be able to conclude that K is the key to decrypt the secret. The corresponding substitution is $\sigma = \{x\mapsto K\}$.\newline
+The $secret$ would be revealed to the intruder if the following holds: $secret\in d(\mathcal{W}\cup\mathcal{L})$. Since $K_{AS} \notin (\mathcal{W}\cup\mathcal{L})$ and $K \notin (\mathcal{W}\cup\mathcal{L})$, not futher knowledge can be derived from $\mathcal{W}\cup\mathcal{L}$. Thus the given protocol is secure in terms of confidentiality -- $secret$ is never revealed to an intruder. \newline
+As for authentication, there is obviously no way for the intruder to impersonate any of the participants without knowledge of the symmetric key $K_{AB}$, which is necessary for both instances $\Pi_1$ and $\Pi_2$ to be properly executed.
 
 \section*{Problem 4: AVISPA Tool: Woo and Lam Attack}
 
