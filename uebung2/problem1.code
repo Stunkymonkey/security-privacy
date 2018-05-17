@@ -1,31 +1,46 @@
-string match(m, t)
-    result = ""
+struct result {
+    bool match
+    string matcher
+}
+
+bool match(m, t)
+    result res = {true, ""}
 
     if (m is encrypted && t is encrypted) // both encrypted
         if (m is encrypted_symmetrically && t is encrypted_symmetrically)
             k_m = encryption_key of m
             k_t = encryption_key of t
-            if (match(m, t)) // both encrypted under same method and key
-                inner_m = decrypt(m) // the "plaintext" of m
-                inner_t = decrypt(t) // the "plaintext" of t
-                result += match(inner_m, inner_t) // match the plaintexts
-            else
-                result = "no match: key mismatch"
-                return result
+            keys_match = match(k_m, k_t)
+            res.match = keys_match.match
+            res.matcher += keys_match.matcher
+            if (keys_match) // both encrypted under same method and key
+                inner_m = decrypt(m) // retrieve the "plaintext" of m
+                inner_t = decrypt(t) // retrieve the "plaintext" of t
+                inner_match = match(inner_m, inner_t) // match the plaintexts
+                res.match = inner_match.match
+                res.matcher += inner_match.matcher
         else
-            result = "no match: encryption method mismatch"
-            return result
+            res.match = false // different encryption methods
     else
-        if (m is encrypted || t is encrypted) // one encrypted one not
-            result = "no match: encrypted vs. unencrypted"
-            return result
+        if (m is encrypted || t is encrypted) 
+            res.match = false // one encrypted one not
         else // both unencrypted
-            if (m is tuple && t is tuple)
-                result += match(first_component(m), first_component(t))
-                result += match(second_component(m), second_component(t))
+            if (m is tuple && t is tuple) // both are tuples, so check for match component-wise
+                first_match = match(first_component(m), match(first_component(t))
+                second_match = match(second_component(m), second_component(t))
+                res.match = first_match && second_match
+                res.matcher += first_match.matcher + second_match.matcher
             else
                 if (m is tuple || t is tuple)
-                    result = "no match: tuple vs. non tuple"
-                    return result
-                else
-                    ...
+                    res.match = false // one is tuple one not
+                else // both are neither tuples nor encrypted, so m is a constant and t is either constant or variable
+                    if (t is variable)
+                        res.matcher += "ground substitution: [" + t + " -> " + m + "]\n" // t must match to m
+                    else 
+                        if (!equals(m, t))
+                            res.match = false // constants mismatch
+                            
+    if (res.match)
+        print "matcher: \n" + res.matcher
+        return true
+    return false
