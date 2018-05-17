@@ -1,0 +1,31 @@
+string match(m, t)
+    result = ""
+
+    if (m is encrypted && t is encrypted) // both encrypted
+        if (m is encrypted_symmetrically && t is encrypted_symmetrically)
+            k_m = encryption_key of m
+            k_t = encryption_key of t
+            if (match(m, t)) // both encrypted under same method and key
+                inner_m = decrypt(m) // the "plaintext" of m
+                inner_t = decrypt(t) // the "plaintext" of t
+                result += match(inner_m, inner_t) // match the plaintexts
+            else
+                result = "no match: key mismatch"
+                return result
+        else
+            result = "no match: encryption method mismatch"
+            return result
+    else
+        if (m is encrypted || t is encrypted) // one encrypted one not
+            result = "no match: encrypted vs. unencrypted"
+            return result
+        else // both unencrypted
+            if (m is tuple && t is tuple)
+                result += match(first_component(m), first_component(t))
+                result += match(second_component(m), second_component(t))
+            else
+                if (m is tuple || t is tuple)
+                    result = "no match: tuple vs. non tuple"
+                    return result
+                else
+                    ...
