@@ -40,13 +40,36 @@
 
 \section*{Problem 1: Matching Algorithm}
 
+The desired algorithm is listed below (pseudo code):
+
+\lstinputlisting[language=C, basicstyle=\tiny]{problem1.code}\ % ist natürlich kein C, sieht so aber besser aus
+\\~\\
+Time complexity (Master Theorem):\\ 
+\tab $f(n) = a \cdot f(\frac{n}{b}) + c(n)$\\
+\tab $a = 2$\\
+\tab $b = 2$\\
+\tab $c(n) \in \mathcal{O}(n^d); d = 2$\\
+\tab $b^d = 2^2 = 4 > a \implies f(n) \in \mathcal{O}(n^2)$\\~\\
+
+Space compexity:
+
 \section*{Problem 2: Basics - Probability Theory}
 
 \section*{Problem 3: Basics - Algorithms}
-\subsection*{a)}
+
+\subsection*{a)} 
+Product space: $\Omega_A^{prod} = \{0, 1\} \times M \times \{0, 1\}^t \times \{0, 1\}^2$\\
+Probability space: $(\Omega_A^{prod}, 2^{\Omega_A^{prod}}, P)$
+
 \subsection*{b)}
+$Pr[A(z) = 1] = Pr[c = 1] \cdot (Pr[a = 1] + Pr[b \cdot a = 1]) = \frac{1}{2} \cdot \frac{1}{15} = \frac{1}{30}$
+
 \subsection*{c)}
+$Pr[d \neq \bot] = Pr[c = 1] \cdot Pr[a < 12] = \frac{1}{2} \cdot \frac{12}{15} = \frac{2}{5}$\\
+(In words: the probability that d is assigned in a run of A.)
+
 \subsection*{d)}
+$Pr[A(z) \leq 24 | b = 2] = Pr[a = 12] = \frac{1}{15}$
 
 \section*{Problem 4: Basics - Group Theory}
 \subsection*{a)}
