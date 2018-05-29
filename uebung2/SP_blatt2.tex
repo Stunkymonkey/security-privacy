@@ -18,6 +18,7 @@
 \usepackage{hyperref}
 \usepackage{extarrows}
 \usepackage{rotating}
+\usepackage{dsfont}
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 
 \usepackage{fancyhdr}
@@ -42,7 +43,64 @@
 \section*{Problem 2: Basics - Probability Theory}
 
 \section*{Problem 3: Basics - Algorithms}
+\subsection*{a)}
+\subsection*{b)}
+\subsection*{c)}
+\subsection*{d)}
 
 \section*{Problem 4: Basics - Group Theory}
+\subsection*{a)}
+\begin{itemize}
+	\item ($ \mathds{Z}^*_{8}, \cdot_{8} $)Nein, da es isomorph zu $ \mathds{Z}^*_2 * \mathds{Z}^*_2 $ ist.\\
+	($ \rightarrow $Es besitzt keine Primitivwurzel.)
+	\item ($ \mathds{Z}^*_{10}, \cdot_{10} $) Ja. Generator ist 3 oder 7\\
+    \begin{table}[!ht]
+    	\centering
+    	\begin{tabular}{|l|l|l|}
+    		\hline
+    		Generator = x        & 3 & 7 \\ \hline
+    		x\textasciicircum{}0 & 1 & 1 \\ \hline
+    		x\textasciicircum{}1 & 3 & 7 \\ \hline
+    		x\textasciicircum{}2 & 9 & 9 \\ \hline
+    		x\textasciicircum{}3 & 7 & 3 \\ \hline
+    		x\textasciicircum{}4 & 1 & 1 \\ \hline
+    	\end{tabular}
+    \end{table}
+\end{itemize}
+
+\subsection*{b)}
+
+Aus der Vorlesung:\\
+$ \mathds{Z}^*_n = \left\lbrace  a \in \mathds{Z}_n | gcd(a, n) = 1 \right\rbrace $
+$ \rightarrow \mathds{Z}^*_n = \left\lbrace  a, b \in \mathds{Z}_n | gcd(a*b, n) = 1 \right\rbrace $\\
+Multiplikation ist ein Gesetz der Komposition auf $ \mathds{Z}^*_n $.
+
+
+~\\
+$ a, b, c \in  \mathds{Z}^*_n $
+\begin{itemize}
+	\item Die Multiplikation ist assoziativ auf $ \mathds{Z}^*_n $:
+	$ ( a * b ) * c =abc= a * ( b * c) $\\
+	($ gcd((a*b)*c, n) = 1 = gcd(a*b*c, n) = gcd(a*(b*c), n) $)
+	
+	
+	
+	\item Ebenso ist die Multiplikation kommutativ: $ a*b = b*a $\\
+	($ gcd(a*b, n) = 1 = gcd(b*a, n) $)
+	
+	
+	
+	\item Neutrales Element:
+	
+	Wir nehmen als Identität 1. Natürlich ist, $ \forall x \in  \mathds{Z} : gcd(1, x) = 1 $, also $ 1 \in \mathds{Z}^*_n $. Dann $ a * 1 = a = 1 * a $. Somit erfüllt 1 die Eigenschaft des neutralen Elements.
+	
+	
+	
+	\item Inverses Element: %Zu jedem $ a\in G $ gibt es ein $ a^{-1} \in G $ mit $ a*a^{-1}=e $.
+	
+	$ \forall x \in  \mathds{Z} $: 
+	$ ax \equiv 1 \pmod{n} $. Es existiert genau dann, wenn $ a $ Teilerfremd zu $ n $ ist, weil in diesem Fall $ gcd(a, n) = 1 $. Und nach Bezous existiert somit ein Inverses Element.
+	 
+\end{itemize}
 
 \end{document}
