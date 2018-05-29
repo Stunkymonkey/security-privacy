@@ -26,7 +26,8 @@ bool match(m, t)
         if (m is encrypted || t is encrypted) 
             res.match = false // one encrypted one not
         else // both unencrypted
-            if (m is tuple && t is tuple) // both are tuples, so check for match component-wise (assuming two components)
+            if (m is tuple && t is tuple) 
+                // both are tuples, so check for match component-wise (assuming two components)
                 first_match = match(first_component(m), first_component(t))
                 t = apply_matcher(t, first_match.matcher) // apply matcher to whole term
                 second_match = match(second_component(m), second_component(t))
@@ -36,9 +37,11 @@ bool match(m, t)
             else
                 if (m is tuple || t is tuple)
                     res.match = false // one is tuple one not
-                else // both are neither tuples nor encrypted, so m is a constant and t is either constant or variable
+                else 
+                    // both neither tuples nor encrypted, so m is constant and t is constant or variable
                     if (t is variable)
-                        res.matcher += "ground substitution: [" + t + " -> " + m + "]\n" // t must be substituted by to m
+                        res.matcher += "ground substitution: [" + t + " -> " + m + "]\n" 
+                        // t must be substituted by m
                     else 
                         if (!equals(m, t))
                             res.match = false // constants mismatch
