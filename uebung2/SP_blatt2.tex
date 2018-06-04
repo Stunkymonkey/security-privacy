@@ -44,14 +44,16 @@ The desired algorithm is listed below (pseudo code):
 
 \lstinputlisting[language=C, basicstyle=\tiny]{problem1.code}\ % ist natürlich kein C, sieht so aber besser aus
 \\~\\
-Time complexity (Master Theorem):\\ 
+For simplicity we assume n in the following as the maximum of the amount of symbols in m and t.\\
+Time complexity (Master Theorem):\\
 \tab $f(n) = a \cdot f(\frac{n}{b}) + c(n)$\\
 \tab $a = 2$\\
 \tab $b = 2$\\
 \tab $c(n) \in \mathcal{O}(n^d); d = 2$\\
 \tab $b^d = 2^2 = 4 > a \implies f(n) \in \mathcal{O}(n^2)$\\~\\
 
-Space compexity:
+Space complexity:\\
+\tab $f(n)\in \mathcal{O}(n)$
 
 \section*{Problem 2: Basics - Probability Theory}
 
@@ -74,10 +76,10 @@ $Pr[A(z) \leq 24 | b = 2] = Pr[a = 12] = \frac{1}{15}$
 \section*{Problem 4: Basics - Group Theory}
 \subsection*{a)}
 \begin{itemize}
-	\item ($ \mathds{Z}^*_{8}, \cdot_{8} $)Nein, da es isomorph zu $ \mathds{Z}^*_2 * \mathds{Z}^*_2 $ ist.\\
+	\item ($ \mathds{Z}^*_{8}, \cdot_{8} $): Nein, da es isomorph zu $ \mathds{Z}^*_2 * \mathds{Z}^*_2 $ ist.\\
 	($ \rightarrow $Es besitzt keine Primitivwurzel.)
-	\item ($ \mathds{Z}^*_{10}, \cdot_{10} $) Ja. Generator ist 3 oder 7\\
-    \begin{table}[!ht]
+	\item ($ \mathds{Z}^*_{10}, \cdot_{10} $): Ja. Generator ist 3 oder 7.\\
+    \begin{table}[!h]
     	\centering
     	\begin{tabular}{|l|l|l|}
     		\hline

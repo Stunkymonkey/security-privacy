@@ -3,7 +3,7 @@ struct result {
     string matcher
 }
 
-bool match(m, t)
+result match(m, t)
     result res = {true, ""}
 
     if (m is encrypted && t is encrypted) // both encrypted
@@ -48,6 +48,8 @@ bool match(m, t)
                             
     if (res.match)
         print "matcher: \n" + res.matcher
+    else
+        res.matcher = NULL
     return res
 
 term apply_matcher(t, matcher)
