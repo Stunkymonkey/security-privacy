@@ -20,6 +20,19 @@ result match(m, t)
                 inner_match = match(inner_m, inner_t) // match the plaintexts
                 res.match = inner_match.match
                 res.matcher += inner_match.matcher
+            else 
+                res.match = false // no matcher for the encryption keys
+        else if (m is encrypted_asymmetrically && t is encrypted_asymmetrically)
+            k_m = encryption_key of m
+            k_t = encryption_key of t
+            if (k_m == k_t)
+                inner_m = decrypt(m) // retrieve the plaintext of m
+                inner_t = decrypt(t) // retrieve the plaintext of t
+                inner_match = match(inner_m, inner_t) // match the plaintexts
+                res.match = inner_match.match
+                res.matcher += inner_match.matcher
+            else
+                res.match = false // different keys
         else
             res.match = false // different encryption methods
     else
