@@ -79,7 +79,7 @@ Compute $name$, $age$, $residence$, $k$, $r$
 Residence: $residence$"\\
 such that $c = E(x, k, r) \land age \geq$ 18 & $name$, $age$\\
 &$\underrightarrow{residence, k, r}$ & Compute $x'$ = "Name: $name$, Age: $age$, \\
-&&Residence: $residence$"\\
+&& Residence: $residence$"\\
 && and $c' = E(x', k, r)$\\
 && \textbf{if} ($c' == c$ \&\& $age \geq 18$)\\
 && \textbf{then} output 1\\
@@ -93,7 +93,7 @@ Proof of properties:
 \end{itemize}
 
 \subsection*{1.}
-In the above protocol we see, that $V$ is deterministic (i.e. $V$ does not use any randomness and always has the same output for a given input). Furthermore $\langle P, V \rangle$ is an IPS for $L$. As we know from problem 2, these are exactly the conditions for $L\in \mathcal{NP}$.
+In the above protocol we see, that $V$ is deterministic (i.e. $V$ does not use any randomness and always has the same output under same conditions). Furthermore $\langle P, V \rangle$ is an IPS for $L$. As we know from problem 2, these are exactly the conditions for $L\in \mathcal{NP}$.
 
 \section*{Problem 4: Equivalent definition of computational ZK}
 
