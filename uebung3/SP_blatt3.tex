@@ -101,5 +101,8 @@ In the above protocol we see, that $V$ is deterministic (i.e. $V$ does not use a
 
 
 \section*{Problem 5: Reducing the error probability 1 $\bigstar$}
+Assuming there is an IPS ($P, V$) as described in (i), i.e. an IPS for $L$ that has completeness bound 1 and soundnessbound $\frac{1}{3}$: One could easily think of another IPS ($P', V'$) that just repeats the original ($P, V$) $n\in \mathbb{N}$ times and lets $V'$ accept only if $V$ accepted in every single run of ($P, V$).\\
+Since we started with completeness bound 1, $V'$ will (also) accept with probability $1^{n} = 1$.\\
+On the other hand, we started with soundness bound $\frac{1}{3}$, which means $V$ would accept for $x\notin L$ with a probability lower than or equal to $\frac{1}{3}$. For $V'$ we can conclude that it accepts with a probability lower than or equal to $\frac{1}{3^n}$. %Note that $f(n) = \frac{1}{3^n}$ is a negligible function.
 
 \end{document}
