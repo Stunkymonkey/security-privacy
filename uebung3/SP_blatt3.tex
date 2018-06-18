@@ -101,8 +101,12 @@ In the above protocol we see, that $V$ is deterministic (i.e. $V$ does not use a
 
 
 \section*{Problem 5: Reducing the error probability 1 $\bigstar$}
-Assuming there is an IPS ($P, V$) as described in (i), i.e. an IPS for $L$ that has completeness bound 1 and soundnessbound $\frac{1}{3}$: One could easily think of another IPS ($P', V'$) that just repeats the original ($P, V$) $n\in \mathbb{N}$ times and lets $V'$ accept only if $V$ accepted in every single run of ($P, V$).\\
-Since we started with completeness bound 1, $V'$ will (also) accept with probability $1^{n} = 1$.\\
-On the other hand, we started with soundness bound $\frac{1}{3}$, which means $V$ would accept for $x\notin L$ with a probability lower than or equal to $\frac{1}{3}$. For $V'$ we can conclude that it accepts with a probability lower than or equal to $\frac{1}{3^n}$. %Note that $f(n) = \frac{1}{3^n}$ is a negligible function.
+Assuming there is an IPS ($P, V$) as described in (i), i.e. an IPS for $L$ that has completeness bound 1 and soundness bound $\frac{1}{3}$: One could easily think of another IPS ($P', V'$) that just repeats the original ($P, V$) $n\in \mathbb{N}$ times and lets $V'$ accept only if $V$ accepted in every single run of ($P, V$).\\
+Since we started with completeness bound 1, $V'$ will (also) accept with probability $1^{n} = 1$ for $x\in L$.\\
+On the other hand, we started with soundness bound $\frac{1}{3}$, which means $V$ would accept for $x\notin L$ with a probability lower than or equal to $\frac{1}{3}$. For $V'$ we can conclude that it accepts with a probability lower than or equal to $\frac{1}{3^n}$.
+Thus we can choose n such that the soundnes bound is lowered to a value arbitrarily close to 0. %(Note that $f(n) = \frac{1}{3^n}$ is a negligible function.)
+\\
+In particular we want to have a soundness bound of $2^{-p(|x|)} = \frac{1}{2^{p(|x|)}}$ for every polynomial p. $V'$ can have polynomial runtime according to the definition of IPS. Thus we are not bound to repeat the proving process only in a linear manner (like $n\in \mathbb{N}$ times). We can also repeat it $p(|x|)$ times resulting in a probability of $V''$ to accept for $x\notin L$ of $\frac{1}{3^{p(|x|)}}$. Thus we have a new soundness bound for $V''$, that is lower than $2^{-p(|x|)}$, while (obviously) the completeness bound remains 1. Hence (i) $\implies$ (ii).\\
+In the other direction, if we have an IPS with completeness bound 1 and soundness bound $2^{-p(|x|)}$ for every polynomial (ii), we are obviously able to always find a $p(x)$ such that $2^{-p(|x|)} \leq \frac{1}{3}$. Thus (ii) $\implies$ (i) and subsequently (i) $\Leftrightarrow$ (ii).
 
 \end{document}
