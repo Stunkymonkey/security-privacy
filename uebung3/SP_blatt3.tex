@@ -89,7 +89,7 @@ such that $c = E(x, k, r) \land age \geq$ 18 & $name$, $age$\\
 Proof of properties:
 % remark: Totally unsure about the runtime of P. By definition of IPS it shall be bounded, but here it seems unbounded?!
 \begin{itemize}
-\item Correctness: It is obvious that for any $c \in L$, $V$ will accept with probability 1, because $V$ does not use any randomness and directly receives all necessary information from $P$ to conclude $c\in L$.\\Thus $Pr[\langle P, V\rangle (c)=1$ $|$ $c\in L] = 1 \geq \frac{2}{3}$.
+\item Completeness: It is obvious that for any $c \in L$, $V$ will accept with probability 1, because $V$ does not use any randomness and directly receives all necessary information from $P$ to conclude $c\in L$.\\Thus $Pr[\langle P, V\rangle (c)=1$ $|$ $c\in L] = 1 \geq \frac{2}{3}$.
 \item Soundness: $\forall c'\notin L$ and $\forall$ ITMs $P^*$: Since $V$ is directly checking the properties for $c'$ itself, there is obviously no chance that any prover would fool $V$ on any $c'\notin L$ to accept upon such a $c'$.\\Thus $Pr[\langle P, V\rangle (c') = 1$ $|$ $c'\notin L] = 0 \leq \frac{1}{3}$
 \end{itemize}
 
@@ -97,6 +97,8 @@ Proof of properties:
 In the above protocol we see, that $V$ is deterministic (i.e. $V$ does not use any randomness and always has the same output under same conditions). Furthermore $\langle P, V \rangle$ is an IPS for $L$. As we know from problem 2, these are exactly the conditions for $L\in \mathcal{NP}$.
 
 \section*{Problem 4: Equivalent definition of computational ZK}
+% SEE slide 23 of slide set 4 for definitions of computational ZK and Views
+
 
 \section*{Problem 5: Reducing the error probability 1 $\bigstar$}
 
