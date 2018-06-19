@@ -39,7 +39,7 @@
 \pagebreak
 
 \section*{Problem 1: Sum of negligible functions}
-Definition: $v$ is negligible $\implies \exists N \in\mathbb{N}$ such that $\forall n>N$ and for all positive polynomials p: 
+Definition: $v$ is negligible $\implies \exists N \in\mathbb{N}$ for every positive polynomial p such that $\forall n>N$: 
 $v(n) < \frac{1}{p(n)}$
 \\~\\
 $v$ and $v'$ negligible: $\exists N_1, N_2 \in \mathbb{N}$, such that: \\
@@ -49,7 +49,7 @@ $v$ and $v'$ negligible: $\exists N_1, N_2 \in \mathbb{N}$, such that: \\
 \\
 Let $w(n) = v(n) + v'(n)$: For $w$ to be negligible, we need an $N_3\in\mathbb{N}$, such that $\forall n>N_3: w(n) < \frac{1}{p(n)}$.
 We conclude from the above, that $\forall n>(N_1+N_2): v(n) + v'(n) < \frac{1}{p(n)} + \frac{1}{p(n)}$, Thus $N_3 = N_1 + N_2$ $\implies$ $\forall n > N_3: w(n) < \frac{2}{p(n)}$.\\ % most likely this already works for max(N_1, N_2)
-Since we're looking at the inverses of $all$ positive polynomials, we can easily generate $\frac{1}{p(n)}$ from $\frac{2}{p(n)}$ by multiplying $p(n)$ by 2, which makes just another polynomial $2p(n)$, at which we are looking anyways. This means, that also $\forall n>N_3: w(n) < \frac{1}{p(n)}$ holds for all positive polynomials p.
+Since we're looking at the inverses of $all$ positive polynomials, we can easily generate $\frac{1}{p(n)}$ from $\frac{2}{p(n)}$ by multiplying $p(n)$ by 2, which makes just another polynomial $p'(n) = $ $2p(n)$, at which we are looking anyway. This means, that there is also an $N_4$, such that $\forall n>N_4: w(n) < \frac{1}{p'(n)}$.
 
 %Alternativ gibt es hier einen Beweis: https://people.eecs.berkeley.edu/~sanjamg/classes/cs276-fall14/scribe/lec02.pdf
 
