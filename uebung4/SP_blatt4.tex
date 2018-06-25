@@ -41,6 +41,10 @@
 \section*{Problem 1: Transitivity of computational indistinguishability}
 %SEE Slide 20 of slide set 4 for definition
 
+%SEE https://www.cs.princeton.edu/courses/archive/fall05/cos433/lec4.pdf page 6 for a proof.
+%Same for www.cs.cornell.edu/courses/cs6830/2009fa/scribes/lec08.pdf page 2
+%Same for www.cs.cornell.edu/courses/cs6830/2011fa/scribes/lecture8.pdf page 3
+
 \section*{Problem 2: Check for e = 0 in the Fiat-Shamir identification protocol}
 Soundness: $\forall	(n, v) \notin L$ and $\forall$ ITMs $P^*$ it shall hold true, that $Pr[\langle P^*, V'\rangle (n, v) = 1]\leq \frac{1}{2}$. That means there should not be a Prover that can convince $V'$ for an $(n, v)\notin L$ to accept with a high probability. ($V'$ as described in the problem description.)\\
 We consider $n=5$, hence $\mathbb{Z}_{n}^* = \mathbb{Z}_{5}^* = \{1, 2, 3, 4\}$. Furthermore we consider $v = 2$. Since $1^2\equiv 1, 2^2\equiv 4, 3^2\equiv 4$ and $4^2\equiv 1$ mod 5: $(n, v) = (5, 2) \notin L$. (There is no square root for 2 in $\mathbb{Z}_5^*$.)\\
