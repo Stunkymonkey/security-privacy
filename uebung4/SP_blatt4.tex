@@ -45,6 +45,28 @@
 %Same for www.cs.cornell.edu/courses/cs6830/2009fa/scribes/lec08.pdf page 2
 %Same for www.cs.cornell.edu/courses/cs6830/2011fa/scribes/lecture8.pdf page 3
 
+$D_x$ is computationally indistinguishable from $D'_x \implies \forall$ TM $U, \exists$ a negligible function $f$, such that $\forall x\in L:$\\$|Pr[U(D_x, x)=1]-Pr[U(D'_x, x)=1]|\leq f(|x|)$.\\
+Analogous for $D'_x$ and $D''_x: \exists$ a negligible function $g$, such that:\\
+$|Pr[U(D'_x, x)=1]-Pr[U(D''_x, x)=1]|\leq g(|x|)$.\\~\\
+Let $h(|x|)=max(f(|x|), g(|x|))$: We can conclude that in the above $f(|x|)$ and $g(|x|)$ can be replaced by $h(|x|)$. (Note that $h(|x|)$ is still negligible, as it is just the greater of the both functions.)
+\\~\\
+We now want to have a look at:\\~\\
+$|Pr[U(D_x, x)=1]-Pr[U(D''_x, x)=1]|$
+\\~\\
+Which is equivalent to:
+\\~\\
+$|Pr[U(D_x, x)=1]-Pr[U(D'_x, x)=1] + Pr[U(D'_x, x)=1]-Pr[U(D''_x, x)=1]|$.
+\\~\\
+Applying triangle inequality, we conclude that:
+\\~\\
+$|Pr[U(D_x, x)=1]-Pr[U(D''_x, x)=1]| \leq$ $|Pr[U(D_x, x)=1]-Pr[U(D'_x, x)=1]| + |Pr[U(D'_x, x)=1]-Pr[U(D''_x, x)=1]|$.
+\\~\\
+Thus:
+\\~\\
+$|Pr[U(D_x, x)=1]-Pr[U(D''_x, x)=1]| \leq 2\cdot h(|x|)$
+\\~\\
+As $2\cdot h(|x|)$ is negligible (namely the sum of two negligible functions), $|Pr[U(D_x, x)=1]-Pr[U(D''_x, x)=1]|$ is upper bounded by the negligible function $j(|x|)=2\cdot h(|x|)$. It follows that $D_x$ and $D''_x$ are also computationally indistinguishable.
+
 \section*{Problem 2: Check for e = 0 in the Fiat-Shamir identification protocol}
 Soundness: $\forall	(n, v) \notin L$ and $\forall$ ITMs $P^*$ it shall hold true, that $Pr[\langle P^*, V'\rangle (n, v) = 1]\leq \frac{1}{2}$. That means there should not be a Prover that can convince $V'$ for an $(n, v)\notin L$ to accept with a high probability. ($V'$ as described in the problem description.)\\
 We consider $n=5$, hence $\mathbb{Z}_{n}^* = \mathbb{Z}_{5}^* = \{1, 2, 3, 4\}$. Furthermore we consider $v = 2$. Since $1^2\equiv 1, 2^2\equiv 4, 3^2\equiv 4$ and $4^2\equiv 1$ mod 5: $(n, v) = (5, 2) \notin L$. (There is no square root for 2 in $\mathbb{Z}_5^*$.)\\
