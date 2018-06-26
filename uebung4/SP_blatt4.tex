@@ -50,21 +50,14 @@ Analogous for $D'_x$ and $D''_x: \exists$ a negligible function $g$, such that:\
 $|Pr[U(D'_x, x)=1]-Pr[U(D''_x, x)=1]|\leq g(|x|)$.\\~\\
 Let $h(|x|)=max(f(|x|), g(|x|))$: We can conclude that in the above $f(|x|)$ and $g(|x|)$ can be replaced by $h(|x|)$. (Note that $h(|x|)$ is still negligible, as it is just the greater of the both functions.)
 \\~\\
-We now want to have a look at:\\~\\
-$|Pr[U(D_x, x)=1]-Pr[U(D''_x, x)=1]|$
-\\~\\
+We now want to have a look at:
+$$|Pr[U(D_x, x)=1]-Pr[U(D''_x, x)=1]|$$
 Which is equivalent to:
-\\~\\
-$|Pr[U(D_x, x)=1]-Pr[U(D'_x, x)=1] + Pr[U(D'_x, x)=1]-Pr[U(D''_x, x)=1]|$.
-\\~\\
+$$|Pr[U(D_x, x)=1]-Pr[U(D'_x, x)=1] + Pr[U(D'_x, x)=1]-Pr[U(D''_x, x)=1]|$$
 Applying triangle inequality, we conclude that:
-\\~\\
-$|Pr[U(D_x, x)=1]-Pr[U(D''_x, x)=1]| \leq$ $|Pr[U(D_x, x)=1]-Pr[U(D'_x, x)=1]| + |Pr[U(D'_x, x)=1]-Pr[U(D''_x, x)=1]|$.
-\\~\\
+$$|Pr[U(D_x, x)=1]-Pr[U(D''_x, x)=1]|\leq$$ $$|Pr[U(D_x, x)=1]-Pr[U(D'_x, x)=1]| + |Pr[U(D'_x, x)=1]-Pr[U(D''_x, x)=1]|$$
 Thus:
-\\~\\
-$|Pr[U(D_x, x)=1]-Pr[U(D''_x, x)=1]| \leq 2\cdot h(|x|)$
-\\~\\
+$$|Pr[U(D_x, x)=1]-Pr[U(D''_x, x)=1]| \leq 2\cdot h(|x|)$$
 As $2\cdot h(|x|)$ is negligible (namely the sum of two negligible functions), $|Pr[U(D_x, x)=1]-Pr[U(D''_x, x)=1]|$ is upper bounded by the negligible function $j(|x|)=2\cdot h(|x|)$. It follows that $D_x$ and $D''_x$ are also computationally indistinguishable.
 
 \section*{Problem 2: Check for e = 0 in the Fiat-Shamir identification protocol}
