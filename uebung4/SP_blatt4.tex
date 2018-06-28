@@ -69,24 +69,24 @@ For our example we let $B$ commit to $x=2$. $V'$ will then send the challenge $e
 So we found a Prover $B$ and an input $(n, v)$ such that $Pr[\langle B, V'\rangle (n, v) = 1]=1>\frac{1}{2}$. Thus $(B, V')$ is not an IPS, since the soundness is not fulfilled.
 
 \section*{Problem 3: Pedersen commitment scheme without randomness}
-Commitment scheme $\mathcal{C} =$ (Gen, com'):
+Commitment scheme $\mathcal{C} = (Gen, com')$:
 \begin{itemize}
 \item \textbf{Computationally Hiding:} 
 $\mathcal{C} =$ is computationally hiding if $\forall$ ppt TM A $|Adv_{A,\mathcal{C}}^{hiding}(\eta)|$ is negligible.
 
 Claim: $\mathcal{C}$ is not computationally hiding. There is an Adversary $A'$ that has a non-negligible advantage $|Adv_{A',\mathcal{C}}^{hiding}(\eta)|>0$, and thus $suc_{A',\mathcal{C}}(\eta) > fail_{A',\mathcal{C}}(\eta)$. More specifically $A'$ has the advantage $|Adv_{A',\mathcal{C}}^{hiding}(\eta)|=1$.
 \\~\\
-Proof: Let $A' = (A'_F, A'_G)$. The security experiment $\mathbb{E}_{\mathcal{A,C}}^{hiding}$ runs as follows:
+Proof: Let $A' = (A'_F, A'_G)$. The security experiment $\mathbb{E}_{\mathcal{A',C}}^{hiding}$ runs as follows:
 \begin{itemize}
-\item Gen is used to generate a group $\mathcal{G}$ with generator $g$ and $q = |\mathcal{G}|$ a prime.
-\item $A'_F$ just selects two possible values $v_0, v_1 \in \mathbb{Z}_q$.
+\item $Gen$ is used to generate a group $\mathcal{G}$ with generator $g$ and $q = |\mathcal{G}|$ a prime.
+\item $A'_F$ just selects two values $v_0, v_1 \in \mathbb{Z}_q$.
 \item A random $b\in \{0,1\}$ is selected and a commitment $c = com((\mathcal{G}, q, g), v_b)$ is calculated.
 \item Now it is $A'_G$'s turn to guess given $(\mathcal{G}, q, g)$ and $c$, which $v_{b'}$ corresponds to that commitment and return $b'$. $A'_G$ works as follows: It calculates $g^{v_i}$ foreach $v_i\in \{0, 1\}$ and returns $b' = i$ if $c = g^{v_i}$.
 \item Finally the security game returns 1 if $b==b'$ and 0 otherwise.
 \end{itemize}
 
-It is obvious, that $A'_G$ is always able to find the correct $b'$. Thus $$Pr[\mathbb{E}_{\mathcal{A,C}}^{hiding} = 1] = 1$$
-$$|Adv_{A,\mathcal{C}}^{hiding}(\eta)| = 2 \cdot (Pr[\mathbb{E}_{\mathcal{A,C}}^{hiding} = 1] - \frac{1}{2})$$
+It is obvious, that $A'_G$ is always able to find the correct $b'$. Thus $$Pr[\mathbb{E}_{\mathcal{A',C}}^{hiding} = 1] = 1$$
+$$|Adv_{A',\mathcal{C}}^{hiding}(\eta)| = 2 \cdot (Pr[\mathbb{E}_{\mathcal{A',C}}^{hiding} = 1] - \frac{1}{2})$$
 $$= 2\cdot(1-\frac{1}{2})=2\cdot\frac{1}{2}=1$$
 
 \item \textbf{Computationally Binding:}
