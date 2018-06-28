@@ -73,27 +73,26 @@ Commitment scheme $\mathcal{C} =$ (Gen, com'):
 \begin{itemize}
 \item \textbf{Computationally Hiding:} 
 $\mathcal{C} =$ is computationally hiding if $\forall$ ppt TM A $|Adv_{A,\mathcal{C}}^{hiding}(\eta)|$ is negligible.
-\\~\\
-We know: $$|Adv_{A,\mathcal{C}}^{hiding}(\eta)| = suc_{A,\mathcal{C}}(\eta) - fail_{A,\mathcal{C}}(\eta)$$
-$$suc_{A,\mathcal{C}}(\eta) = Pr[\mathbb{S}\langle b=1\rangle (1^{\eta})=1]$$
-$$fail_{A,\mathcal{C}}(\eta) = Pr[\mathbb{S}\langle b=0\rangle (1^{\eta})=1]$$
 
-Claim: $\mathcal{C}$ is not computationally hiding. There is an Adversary A' that has a non-negligible advantage $|Adv_{A',\mathcal{C}}^{hiding}(\eta)|>0$, and thus $suc_{A',\mathcal{C}}(\eta) > fail_{A',\mathcal{C}}(\eta)$.
+Claim: $\mathcal{C}$ is not computationally hiding. There is an Adversary $A'$ that has a non-negligible advantage $|Adv_{A',\mathcal{C}}^{hiding}(\eta)|>0$, and thus $suc_{A',\mathcal{C}}(\eta) > fail_{A',\mathcal{C}}(\eta)$. More specifically $A'$ has the advantage $|Adv_{A',\mathcal{C}}^{hiding}(\eta)|=1$.
 \\~\\
-Proof: A' to be found...
-\\
+Proof: Let $A' = (A'_F, A'_G)$. The security experiment $\mathbb{E}_{\mathcal{A,C}}^{hiding}$ runs as follows:
+\begin{itemize}
+\item Gen is used to generate a group $\mathcal{G}$ with generator $g$ and $q = |\mathcal{G}|$ a prime.
+\item $A'_F$ just selects two possible values $v_0, v_1 \in \mathbb{Z}_q$.
+\item A random $b\in \{0,1\}$ is selected and a commitment $c = com((\mathcal{G}, q, g), v_b)$ is calculated.
+\item Now it is $A'_G$'s turn to guess given $(\mathcal{G}, q, g)$ and $c$, which $v_{b'}$ corresponds to that commitment and return $b'$. $A'_G$ works as follows: It calculates $g^{v_i}$ foreach $v_i\in \{0, 1\}$ and returns $b' = i$ if $c = g^{v_i}$.
+\item Finally the security game returns 1 if $b==b'$ and 0 otherwise.
+\end{itemize}
 
-% NOTES
-$Pr[com'((\mathcal{G},q,g,h), v) = c] = Pr[g^v=c]$
-\\
-Since g is a Generator of $\mathcal{G}:\exists c'\in \mathbb{Z}_q:g^{c'}=c$
-\\
-$Pr[g^v=c] = Pr[g^v = g^{c'}] = Pr[v = c'] = (?)$
-% END NOTES
+It is obvious, that $A'_G$ is always able to find the correct $b'$. Thus $$Pr[\mathbb{E}_{\mathcal{A,C}}^{hiding} = 1] = 1$$
+$$|Adv_{A,\mathcal{C}}^{hiding}(\eta)| = 2 \cdot (Pr[\mathbb{E}_{\mathcal{A,C}}^{hiding} = 1] - \frac{1}{2})$$
+$$= 2\cdot(1-\frac{1}{2})=2\cdot\frac{1}{2}=1$$
 
 \item \textbf{Computationally Binding:}
 $\mathcal{C} =$ is computationally binding if $\forall$ ppt TM A $|Adv_{A,\mathcal{C}}^{binding}(\eta)|$ is negligible.
 $$|Adv_{A,\mathcal{C}}^{binding}(\eta)| = Pr[\mathbb{E}_{A,\mathcal{C}}^{binding}(1^{\eta})=1]$$
+... to be continued
 \end{itemize}
 
 \section*{Problem 4: Schnorr’s protocol - proof of knowledge}
