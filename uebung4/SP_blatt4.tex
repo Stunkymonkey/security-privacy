@@ -97,5 +97,17 @@ Assume there were $v_0, v_1 \in \mathbb{Z}_q, v_0 \neq v_1$. As we know the comm
 \end{itemize}
 
 \section*{Problem 4: Schnorr’s protocol - proof of knowledge}
+% SEE slide 8 of slide set 6 for definition of "proof of knowledge"
+In the following we denote the corresponding language for $R_{DL}$ as $L_R = \{(\mathcal{G}, q, g, h)|\exists$ $\omega: ((\mathcal{G}, q, g, h), \omega)\in R_{DL}\}$.
+By definition the IPS $(P,V)$ is a proof of knowledge with respect to $R_{DL}$ and knowledge error $\kappa$ if it fulfills the requirements of \textbf{non-triviality} and \textbf{validity}:
+\begin{itemize}
+\item \textbf{Non-triviality}: $\forall x \in L_R: Pr[\langle P, V \rangle (x) = 1] = 1$ (Definition)
+\\~\\
+It is easy to see, that for any $x \in L_R$ if the prover behaves correctly, $V$ would accept with probability 1, because $V$ directly checks the conditions for $x\in L_R$ itself.
+\item \textbf{Validity}: $\exists$ polynomial $q, \exists$ ITM $K$, $\forall$ ITM $B$, $\forall x\in L_R,\forall\alpha\in\{0,1\}^{t(|x|)}$ where $t$ is the runtimebound of $B$:\\
+If $p(x,\alpha) := Pr[\langle B^{\alpha}, V\rangle (x) = 1] > \kappa(|x|)$ then $K^{B_{x,\alpha}}(x)$ outputs a witness $\omega\in R(x)$ where the exprected runtime of $K$ is bounded by $\frac{q(|x|)}{p(x, \alpha)-\kappa(|x|)}$. (Definition)
+\\~\\
+Abc
+\end{itemize}
 
 \end{document}
