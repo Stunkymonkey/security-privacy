@@ -71,17 +71,17 @@ So we found a Prover $B$ and an input $(n, v)$ such that $Pr[\langle B, V'\rangl
 \section*{Problem 3: Pedersen commitment scheme without randomness}
 Commitment scheme $\mathcal{C} = (Gen, com')$:
 \begin{itemize}
-\item \textbf{Computationally Hiding:} 
-$\mathcal{C} =$ is computationally hiding if $\forall$ ppt TM A $|Adv_{A,\mathcal{C}}^{hiding}(\eta)|$ is negligible.
-
-Claim: $\mathcal{C}$ is not computationally hiding. There is an Adversary $A'$ that has a non-negligible advantage $|Adv_{A',\mathcal{C}}^{hiding}(\eta)|>0$, and thus $suc_{A',\mathcal{C}}(\eta) > fail_{A',\mathcal{C}}(\eta)$. More specifically $A'$ has the advantage $|Adv_{A',\mathcal{C}}^{hiding}(\eta)|=1$.
+\item \textbf{Computational Hiding:} 
+$\mathcal{C}$ is computationally hiding if $\forall$ ppt TM A $|Adv_{A,\mathcal{C}}^{hiding}(\eta)|$ is negligible.
 \\~\\
-Proof: Let $A' = (A'_F, A'_G)$. The security experiment $\mathbb{E}_{\mathcal{A',C}}^{hiding}$ runs as follows:
+\underline{Claim}: $\mathcal{C}$ is not computationally hiding. There is an adversary $A'$ that has a non-negligible advantage $|Adv_{A',\mathcal{C}}^{hiding}(\eta)|>0$. More specifically $A'$ has the advantage $|Adv_{A',\mathcal{C}}^{hiding}(\eta)|=1$.
+\\~\\
+\underline{Proof}: Let $A' = (A'_F, A'_G)$. The security experiment $\mathbb{E}_{\mathcal{A',C}}^{hiding}$ runs as follows:
 \begin{itemize}
 \item $Gen$ is used to generate a group $\mathcal{G}$ with generator $g$ and $q = |\mathcal{G}|$ a prime.
 \item $A'_F$ just selects two values $v_0, v_1 \in \mathbb{Z}_q$.
-\item A random $b\in \{0,1\}$ is selected and a commitment $c = com((\mathcal{G}, q, g), v_b)$ is calculated.
-\item Now it is $A'_G$'s turn to guess given $(\mathcal{G}, q, g)$ and $c$, which $v_{b'}$ corresponds to that commitment and return $b'$. $A'_G$ works as follows: It calculates $g^{v_i}$ foreach $v_i\in \{0, 1\}$ and returns $b' = i$ if $c = g^{v_i}$.
+\item A random $b\in \{0,1\}$ is selected and a commitment $c = com'((\mathcal{G}, q, g), v_b)$ is calculated.
+\item Now it is $A'_G$'s turn to guess given $(\mathcal{G}, q, g,h)$ and $c$, which $v_{b'}$ corresponds to that commitment and return $b'$. $A'_G$ works as follows: It calculates $g^{v_i}$ foreach $v_i\in \{0, 1\}$ and returns $b' = i$ if $c = g^{v_i}$.
 \item Finally the security game returns 1 if $b==b'$ and 0 otherwise.
 \end{itemize}
 
@@ -89,10 +89,11 @@ It is obvious, that $A'_G$ is always able to find the correct $b'$. Thus $$Pr[\m
 $$|Adv_{A',\mathcal{C}}^{hiding}(\eta)| = 2 \cdot (Pr[\mathbb{E}_{\mathcal{A',C}}^{hiding} = 1] - \frac{1}{2})$$
 $$= 2\cdot(1-\frac{1}{2})=2\cdot\frac{1}{2}=1$$
 
-\item \textbf{Computationally Binding:}
-$\mathcal{C} =$ is computationally binding if $\forall$ ppt TM A $|Adv_{A,\mathcal{C}}^{binding}(\eta)|$ is negligible.
+\item \textbf{Computational Binding:}
+$\mathcal{C}$ is computationally binding if $\forall$ ppt TM A $|Adv_{A,\mathcal{C}}^{binding}(\eta)|$ is negligible.
 $$|Adv_{A,\mathcal{C}}^{binding}(\eta)| = Pr[\mathbb{E}_{A,\mathcal{C}}^{binding}(1^{\eta})=1]$$
-... to be continued
+In words the advantage of every possible adversary $A'$ shall be negligible. The advantage is the probability that $A'$ is able to find $v_0 \neq v_1 \in \mathbb{Z}_q$, such that $com'((\mathcal{G},q,g,h),v_0) = c = com'((\mathcal{G},q,g,h),v_1)$ for a randomly generated $p = (\mathcal{G},q,g,h)$. (Which is the essential point of $\mathbb{E}_{A,\mathcal{C}}^{binding}$.)\\
+Assume there were $v_0, v_1 \in \mathbb{Z}_q, v_0 \neq v_1$. As we know the commitment is simply calculated as $g^{v_0}$ for $v_0$ and $g^{v_1}$ for $v_1$. Thus it would be required, that $g^{v_0} = g^{v_1}$. Note that $\mathcal{G}$ is a cyclic finite Group and $c \in \mathcal{G}$. Thus $g^{v_0} = g^{v_1} \implies v_0 = v_1$ in contradiction to the assumption. It is not possible for any adversary to find an ambiguous commitment. Thus the advantage of all ppt TM A is zero. It follows that $\mathcal{C}$ is computationally binding.
 \end{itemize}
 
 \section*{Problem 4: Schnorr’s protocol - proof of knowledge}
