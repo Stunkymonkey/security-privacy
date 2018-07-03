@@ -105,9 +105,45 @@ By definition the IPS $(P,V)$ is a proof of knowledge with respect to $R_{DL}$ a
 \\~\\
 It is easy to see, that for any $x \in L_R$ if the prover behaves correctly, $V$ would accept with probability 1, because $V$ directly checks the conditions for $x\in L_R$ itself.
 \item \textbf{Validity}: $\exists$ polynomial $q, \exists$ ITM $K$, $\forall$ ITM $B$, $\forall x\in L_R,\forall\alpha\in\{0,1\}^{t(|x|)}$ where $t$ is the runtimebound of $B$:\\
-If $p(x,\alpha) := Pr[\langle B^{\alpha}, V\rangle (x) = 1] > \kappa(|x|)$ then $K^{B_{x,\alpha}}(x)$ outputs a witness $\omega\in R(x)$ where the exprected runtime of $K$ is bounded by $\frac{q(|x|)}{p(x, \alpha)-\kappa(|x|)}$. (Definition)
+If $p(x,\alpha) := Pr[\langle B^{\alpha}, V\rangle (x) = 1] > \kappa(|x|)$ then $K^{B_{x,\alpha}}(x)$ outputs a witness $\omega\in R(x)$ where the expected runtime of $K$ is bounded by $\frac{q(|x|)}{p(x, \alpha)-\kappa(|x|)}$. (Definition)
 \\~\\
-Abc
+We want to show that Schnorr’s protocol (as given) is a proof of knowledge with knowledge error $\kappa = \frac{1}{2^{t}}$:\\
+Intuitively as there are $2^t$ possible challenges for $V$ to generate in one run, $B$ needs to be able to answer more than one of these challenges correctly to achive $p(x,\alpha)>\kappa$. This can be proven as follows: Let $o:=o(|(\mathcal{G}, q, g, h)|)$ be the runtimebound of $B$ and $\alpha\in \{0,1\}^o$ the randomness for $B$, while t is a fixed constant. 
+$$Pr[\langle B^{\alpha}, V\rangle (x) = 1] = \sum_{i \in \{0,1\}^t}{Pr[\langle B^{\alpha}, V\rangle (x) = 1|e=i]\cdot Pr[e=i]}$$
+$$Pr[e=i] = \frac{1}{2^t}$$
+$$\implies Pr[\langle B^{\alpha}, V\rangle (x) = 1] = \frac{1}{2^t} \cdot \sum_{i \in \{0,1\}^t}{Pr[\langle B^{\alpha}, V\rangle (x) = 1|e=i]}$$
+Thus $Pr[\langle B^{\alpha}, V\rangle (x) = 1] > \frac{1}{2^t}$ can only hold true, if the sum in the above is greater or equal to 2. We know 
+$$Pr[\langle B^{\alpha}, V\rangle (x) = 1|e=i] \in \{0,1\}$$
+Thus in particular there must be $e_1, e_2 \in \{0,1\}^t, e_1\neq e_2$ such that 
+$$Pr[\langle B^{\alpha}, V\rangle (x) = 1|e=e_1]=Pr[\langle B^{\alpha}, V\rangle (x) = 1|e=e_2]=1$$
+\\
+We can now construct a knowledge extractor $K$ that interacts with $B^{\alpha}$ as follows:
+
+Knoledge Extractor $K^{B_{(\mathcal{G}, q, g, h), \alpha}}(\mathcal{G}, q, g, h):$
+\begin{enumerate}
+\item Receive a commitment:\\
+\tab $c \leftarrow B_{(\mathcal{G}, q, g, h), \alpha}()$
+
+\item Let $V$ generate challenges for $c$ and $B$ generate responses to these challanges until $V$ accepts for $e_1$:\\
+\tab $y_{e_1} \leftarrow B_{(\mathcal{G}, q, g, h), \alpha}(c, e_1)$
+
+\item Repeat step 2 until $e_2\neq e_1$ is found such that $V$ accepts:\\
+\tab $y_{e_2} \leftarrow B_{(\mathcal{G}, q, g, h), \alpha}(c, e_2)$
+
+\item Compute a witness:\\
+\tab $w = \frac{y_1-y_2}{e_1-e_2} \mod q$
+
+\item Output result:\\
+\tab \textbf{output} $w$
+\end{enumerate}
+The calculation of $w$ can be derived from the calculation that $B$ uses to generate its response as follows:\\
+$$y_1 \equiv r + e_1\cdot w \mod q$$
+$$y_2 \equiv r + e_2\cdot w \mod q$$
+$$y_1 - e_1\cdot w \equiv y_2 - e_2\cdot w \mod q$$
+$$y_1-y_2 \equiv e_1 \cdot w - e_2 \cdot w \equiv (e_1-e_2)\cdot w\mod q$$
+$$w \equiv \frac{y_1-y_2}{e_1-e_2} \mod q$$
+\\
+As for the runtimebound of $K$: Note that as shown above $p(x, \alpha) = \frac{1}{2^t}\cdot u = \frac{u}{2^t}$ where $u\in \{2,...,2^t\}$. More specifically $p(x, \alpha)\leq \frac{2^t}{2^t} = 1$. Thus $\frac{q(|x|)}{p(x, \alpha)-\kappa(|x|)} \geq \frac{q(|x|)}{1 - 2^t}$. $t$ is a constant independend of the input. $K$ is ppt. Thus $q$ exists such that the runtime of $K$ is bounded by $\frac{q(|x|)}{p(x, \alpha)-\kappa(|x|)}$ and \textbf{validity} holds true.
 \end{itemize}
 
 \end{document}
