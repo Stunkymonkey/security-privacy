@@ -1,0 +1,58 @@
+\documentclass[12pt,pdftex,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ulem}
+\usepackage{bbm}
+\usepackage{array}
+\usepackage{marvosym}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage[pdftex]{graphicx}
+\usepackage{listings}
+\lstset{language=Python,basicstyle=\footnotesize}
+\usepackage{pdfpages}
+\usepackage{booktabs}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{extarrows}
+\usepackage{rotating}
+\usepackage{dsfont}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Franziska Hutter(3295896) - 
+	Felix Truger(3331705) - 
+	Felix Bühler(2973410)}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\title{Security and Privacy,\\ Blatt 5}
+\author{Franziska Hutter (3295896)\\
+	Felix Truger (3331705)\\
+	Felix Bühler (2973410)}
+
+
+\begin{document}
+\maketitle
+\pagebreak
+
+\section*{Problem 1: Schnorr’s protocol - special honest verifier zero-knowledge}
+
+% SEE for reference: http://www.cs.au.dk/~ivan/Sigma.pdf
+% https://cs.nyu.edu/courses/spring07/G22.3220-001/lec2.pdf
+% danieleventuri.altervista.org/files/zero-knowledge.pdf (contains proof)
+
+It is easy to see, that $(P, V)$ as given for Schnorr’s protocol has the form of a $\Sigma$-protocol with commitment $a$, challenge $e$ and response $z$.
+The ``special honest verifier ZK'' property requires: $\exists$ ppt simulator $M$ such that $\forall x\in L_R$ and $e\in \{0,1\}^t: M(x, e) = Trans_{V^e}^P(x)$ where $Trans_{V^e}^P(x)$ is the Transcript of an interaction between $P$ and $V$ using challenge $e$ on input $x$.
+
+\section*{Problem 2: Homomorphic properties of algorithms}
+
+\section*{Problem 3: Building circuits for functions}
+
+\section*{Problem 4: Garbled circuits}
+
+\section*{Problem 5: 51\%-Attack on Bitcoin}
+
+\end{document}
