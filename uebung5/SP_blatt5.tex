@@ -65,37 +65,8 @@ $$= com^{r_0+r_1}(p, v_0 + v_1)$$
 % This definitely seems TOO EASY?!?
 
 \section*{Problem 3: Building circuits for functions}
-{\small 
-Note: We used the slightly different IEC notation where $"$ $=1"$ denotes an XOR gate and $"\geq 1"$ denotes an OR gate.}\\
 Find the drawing of our circuit for $f$ below.\\
-\begin{circuitikz} 
-\draw
-(0,0) node[european xor port] (myXOR) {}
-(2,1) node[european and port] (myAND) {}
-
-(myXOR.in 1) node (a0)[yshift=1cm, xshift=-0.5cm] {$a_0$}
-(myXOR.in 2) node (b0)[xshift=-0.5cm] {$b_0$}
-;
-\draw (myXOR.out) -- (myAND.in 2);
-\draw (a0) -- (myAND.in 1);
-\draw (a0) -- (myXOR.in 1);
-
-\draw
-(0,2) node[european xor port] (myXOR2) {}
-(2,3) node[european and port] (myAND2) {}
-
-(myXOR2.in 1) node (a1)[yshift=1cm, xshift=-0.5cm] {$a_1$}
-(myXOR2.in 2) node (b1)[xshift=-0.5cm] {$b_1$};
-\draw (myXOR2.out) -- (myAND2.in 2);
-\draw (a1) -- (myAND2.in 1);
-\draw (a1) -- (myXOR2.in 1);
-
-\draw
-(4,2) node[european or port] (myOR){}
-(myOR.out) node (c)[xshift=0.5cm] {$c$};
-\draw (myOR.in 1) -- (myAND2.out);
-\draw (myOR.in 2) -- (myAND.out);
-\end{circuitikz}
+\includegraphics[width=200pt]{./problem3_binary_circuit.png}
 
 \section*{Problem 4: Garbled circuits}
 Find a garbled circuit for the given circuit below.\\
