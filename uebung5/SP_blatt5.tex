@@ -22,6 +22,15 @@
 \usepackage{circuitikz}
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 
+\def\bitcoinA{%
+  \leavevmode
+  \vtop{\offinterlineskip %\bfseries
+    \setbox0=\hbox{B}%
+    \setbox2=\hbox to\wd0{\hfil\hskip-.03em
+    \vrule height .3ex width .15ex\hskip .08em
+    \vrule height .3ex width .15ex\hfil}
+    \vbox{\copy2\box0}\box2}}
+
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \lhead{Franziska Hutter(3295896) - 
@@ -46,8 +55,34 @@
 % danieleventuri.altervista.org/files/zero-knowledge.pdf (contains proof)
 
 It is easy to see, that $(P, V)$ as given for Schnorr’s protocol has the form of a $\Sigma$-protocol with commitment $a$, challenge $e$ and response $z$.
-The ``special honest verifier ZK'' property requires: $\exists$ ppt simulator $M$ such that $\forall x\in L_R$ and $e\in \{0,1\}^t: M(x, e) = Trans_{V^e}^P(x)$ where $Trans_{V^e}^P(x)$ is the Transcript of an interaction between $P$ and $V$ using challenge $e$ on input $x$.
-\\~\\to be continued
+The ``special honest verifier ZK'' property requires: $\exists$ ppt simulator $M$ such that $\forall x\in L_R$ and $e\in \{0,1\}^t: M(x, e) = Trans_{V^e}^P(x)$ where $Trans_{V^e}^P(x)$ is the Transcript of an interaction between (honest) $P$ and $V$ using challenge $e$ on input $x$ and equality refers to an identical distribution.
+\\~\\
+$M$ works as follows:
+\begin{itemize}
+\item Receive inputs $(\mathcal{G},q,g,h)$ and $e$.
+\item Select $z\in\mathbb{Z}_q$ randomly.
+\item Calculate $a = \frac{g^z}{h^e}\mod q$.
+\item Output transcript $(a, e, z)$.
+\end{itemize}\
+\\
+On the calculation of $a$:\\
+We know from the protocol, that $P$ calculates $z$ as follows:
+$$z=r+e\cdot w \mod q$$
+Since $\mathcal{G}$ is cyclic with generator $g$:
+$$g^z = g^{r+e\cdot w \mod q} = g^r \cdot g^{e\cdot w \mod q}$$
+We also know:
+$$g^r = a; g^w=h$$
+$$\implies g^z = a \cdot h^e \mod q$$
+$$a = \frac{g^z}{h^e} \mod q$$
+\\
+As for the probability distribution of a transcript of $(P,V^e)$, we know that $r\in \mathbb{Z}_q$ is selected randomly by the honest prover and thus $a = g^r$ is indirectly selected randomly as well with the same distribution as for $r$. Note again, that $\mathcal{G}$ is cyclic. $z$ on the other hand directly depends on the other values and can be calculated by a deterministic function, as it is actually performed by $P$.\\
+We have the same probability distribution for $M$, as for $M$ $z\in \mathbb{Z}_q$ is selected at random. $a$ is then deterministically calculated from $e$ and $z$. Just the other way around.\\
+More precisely we have the same probability space $(\Omega, 2^{\Omega}, P)$ in both cases, where
+\begin{itemize}
+\item $\Omega = \mathbb{Z}_q$
+\item $P: 2^{\Omega} \rightarrow [0,1]$ is a uniform distribution.
+\end{itemize}\
+It follows from the above, that Schnorr's protocol fulfills the ``special honest verifier ZK'' property.
 
 \section*{Problem 2: Homomorphic properties of algorithms}
 $p=(\mathcal{G},q,g,h)$ fixed, $r_0, r_1, v_0, v_1 \in \mathbb{Z}_q$, we show:
@@ -73,5 +108,12 @@ Find a garbled circuit for the given circuit below.\\
 \includegraphics[width=\textwidth]{./problem4_garbled_circuit.png}
 
 \section*{Problem 5: 51\%-Attack on Bitcoin}
+Preliminary thoughts before the actual lecture on the topic:
+\subsection*{(a)}
+With 49\% of the hash-power a block is found within 20 minutes on average, i.e. 3 blocks per hour. Thus 51\% of the hash-power can find $\frac{3}{49\%}\cdot 51\% \approx 3.12245$ blocks per hour. The attacker needs to find 6 blocks more than the honest part of the network in the same time. This is: $t\cdot 0.12245 = 6$, which leads to $t \approx 49$ hours needed to catch up with the honest branch.
+\subsection*{(b)}
+In the calculated 49 hours the attacker generates $3.12245 \cdot 49 \approx 153$ new blocks. Obviously the difference between the earnings and costs for finding a block is $100,000$\EUR{}$ - 12.5\cdot 6,000$\EUR{}$ = 25,000$\EUR{}. Thus the attacker would need to make an additional $25,000$\EUR{} $\cdot 153 = 3,825,000$\EUR{} via double-spending to compensate his costs. Under the given circumstances $3,825,000$\EUR{} were worth approximately $637.5$\bitcoinA. To make a profit, the attacker would need to double-spend at least a bit more than the aforementioned amount.
+\subsection*{(c)}
+No idea so far.
 
 \end{document}
