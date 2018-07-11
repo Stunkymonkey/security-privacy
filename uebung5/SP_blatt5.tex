@@ -22,6 +22,7 @@
 \usepackage{circuitikz}
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 
+\usepackage{eurosym}
 \def\bitcoinA{%
   \leavevmode
   \vtop{\offinterlineskip %\bfseries
@@ -73,10 +74,11 @@ $$g^z = g^{r+e\cdot w \mod q} = g^r \cdot g^{e\cdot w \mod q}$$
 We also know:
 $$g^r = a; g^w=h$$
 $$\implies g^z = a \cdot h^e \mod q$$
+Thus a valid $a$ can be calculated as follows:
 $$a = \frac{g^z}{h^e} \mod q$$
 \\
 As for the probability distribution of a transcript of $(P,V^e)$, we know that $r\in \mathbb{Z}_q$ is selected randomly by the honest prover and thus $a = g^r$ is indirectly selected randomly as well with the same distribution as for $r$. Note again, that $\mathcal{G}$ is cyclic. $z$ on the other hand directly depends on the other values and can be calculated by a deterministic function, as it is actually performed by $P$.\\
-We have the same probability distribution for $M$, as for $M$ $z\in \mathbb{Z}_q$ is selected at random. $a$ is then deterministically calculated from $e$ and $z$. Just the other way around.\\
+We have the same probability distribution for $M$, as $z\in \mathbb{Z}_q$ is selected at random. $a$ is then deterministically calculated from $e$ and $z$. Just the other way around.\\
 More precisely we have the same probability space $(\Omega, 2^{\Omega}, P)$ in both cases, where
 \begin{itemize}
 \item $\Omega = \mathbb{Z}_q$
@@ -106,14 +108,18 @@ Find the drawing of our circuit for $f$ below.\\
 \section*{Problem 4: Garbled circuits}
 Find a garbled circuit for the given circuit below.\\
 \includegraphics[width=\textwidth]{./problem4_garbled_circuit.png}
+Note that we simplified the circuit by replacing the AND gate in the middle by a NAND gate, so we do not need an additional NOT gate to get the inverse of the input for the following XOR gate.
 
 \section*{Problem 5: 51\%-Attack on Bitcoin}
-Preliminary thoughts before the actual lecture on the topic:
 \subsection*{(a)}
 With 49\% of the hash-power a block is found within 20 minutes on average, i.e. 3 blocks per hour. Thus 51\% of the hash-power can find $\frac{3}{49\%}\cdot 51\% \approx 3.12245$ blocks per hour. The attacker needs to find 6 blocks more than the honest part of the network in the same time. This is: $t\cdot 0.12245 = 6$, which leads to $t \approx 49$ hours needed to catch up with the honest branch.
 \subsection*{(b)}
-In the calculated 49 hours the attacker generates $3.12245 \cdot 49 \approx 153$ new blocks. Obviously the difference between the earnings and costs for finding a block is $100,000$\EUR{}$ - 12.5\cdot 6,000$\EUR{}$ = 25,000$\EUR{}. Thus the attacker would need to make an additional $25,000$\EUR{} $\cdot 153 = 3,825,000$\EUR{} via double-spending to compensate his costs. Under the given circumstances $3,825,000$\EUR{} were worth approximately $637.5$\bitcoinA. To make a profit, the attacker would need to double-spend at least a bit more than the aforementioned amount.
+In the calculated 49 hours the attacker generates $3.12245 \cdot 49 \approx 153$ new blocks. Obviously the difference between the earnings and costs for finding a block is $100,000\frac{\text{\euro}}{block} - 12.5\frac{\bitcoinA}{block}\cdot 6,000\frac{\text{\euro}}{\bitcoinA} = 25,000\frac{\text{\euro}}{block}$. Thus the attacker would need to make an additional $25,000\frac{\text{\euro}}{block} \cdot 153 blocks = 3,825,000\text{\euro}$ via double-spending to compensate his costs. Under the given circumstances $3,825,000$\EUR{} were worth approximately $637.5$\bitcoinA. To make a profit, the attacker would need to double-spend at least a bit more than the aforementioned amount.
 \subsection*{(c)}
-No idea so far.
+Ideas to make a 51\% attack more efficient:
+\begin{itemize}
+\item The attacker could simultaneously to his attack manipulate the network such that newly found blocks are not communicated properly to all parties. The propagation of blocks relies on the gossip protocol. If the attacker prevents the proper communication between parties, different mining pools might work on different versions of the blockchain (i.e. one pool does not know that a new block is already found and keeps working on an old version of the chain), thus the hash-power of the honest miners may be splitted, leading to an advantage for the attacker.
+\item Similarly the attacker might even be able to manipulate mining pools to work on his own branch of the blockchain, by propagating it as the latest version and hindering the propagation of the honest branch to certain mining pools. (Note: This method will only work, if the attacker already separated the network beforehand, i.e. when the 7-th last block was generated.)
+\end{itemize}
 
 \end{document}
