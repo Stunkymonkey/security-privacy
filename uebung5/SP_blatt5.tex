@@ -119,7 +119,7 @@ In the calculated 49 hours the attacker generates $3.12245 \cdot 49 \approx 153$
 Ideas to make a 51\% attack more efficient:
 \begin{itemize}
 \item The attacker could simultaneously to his attack manipulate the network such that newly found blocks are not communicated properly to all parties. The propagation of blocks relies on the gossip protocol. If the attacker prevents the proper communication between parties, different mining pools might work on different versions of the blockchain (i.e. one pool does not know that a new block is already found and keeps working on an old version of the chain), thus the hash-power of the honest miners may be splitted, leading to an advantage for the attacker.
-\item Similarly the attacker might even be able to manipulate mining pools to work on his own branch of the blockchain, by propagating it as the latest version and hindering the propagation of the honest branch to certain mining pools. (Note: This method will only work, if the attacker already separated the network beforehand, i.e. when the 7-th last block was generated.)
+\item Similarly the attacker might even be able to manipulate mining pools to work on his own branch of the blockchain, by propagating it as the latest version and hindering the propagation of the honest branch to certain mining pools. (Note: This method requires the attacker to separate the network ideally beforehand or alternatively once his blockchain is close to the honest blockchain.)
 \end{itemize}
 
 \end{document}
